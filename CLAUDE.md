@@ -54,6 +54,16 @@ groupe de potes qui joue à Project Zomboid ensemble. Pas un produit commercial.
 - Ne jamais faire correspondre explicitement la numérotation de Kessler et
   le jour réel de la partie du groupe
 
+## Règle du full RP (s'applique à tout le contenu et tous les outils)
+
+Rien dans le disque de Kessler ne doit exposer de paramètres ou notions
+qui n'existent que parce qu'on est dans un jeu vidéo (nombre de joueurs,
+niveau de difficulté, réglages serveur, noms de compétences/traits comme
+des choix de menu, etc.). Le configurateur de survie a été retiré du
+terminal pour cette raison (voir historique). Avant d'ajouter un nouvel
+outil ou contenu, vérifier qu'un survivaliste dans la fiction aurait pu
+raisonnablement l'écrire ou l'utiliser tel quel.
+
 ## Où en est le projet (état actuel)
 
 Trois fichiers HTML autonomes ont été prototypés et validés un par un dans
@@ -128,8 +138,10 @@ dans un seul fichier.
 │   └── 01 à 15 (Tome 1)                  [Tome 1 complet, porté]
 ├── 02_ROLES_ET_COMPETENCES/       [stub, pas construit — voir note Tome 2 ci-dessous]
 ├── 03_OUTILS/
-│   ├── configurateur_survie.html [fonctionnel, relié au menu (action de type 'link', nouvel onglet)]
 │   └── explorateur_artisanat.html [stub, pas construit]
+│       (configurateur_survie.html retiré du menu — incompatible full RP,
+│        voir "Règle du full RP" plus bas ; fichier conservé dans tools/
+│        comme lien à partager hors-terminal si besoin)
 ├── 04_REFERENCE_TERRAIN/          [6 articles du Tome 2, filtrés RP — voir note ci-dessous]
 └── PERSONNEL/
     └── journal.txt                [fait, branché dans le terminal, voir contenu plus bas]

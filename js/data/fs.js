@@ -19,7 +19,6 @@ const nodes = {
   outils: {
     path: '/KNOX_SURVIE/03_OUTILS',
     items: [
-      {label:'configurateur_survie.html', tag:'[APP]', action:{type:'link', url:'tools/configurateur.html'}},
       {label:'explorateur_artisanat.html', tag:'[APP]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
     ]
   },
