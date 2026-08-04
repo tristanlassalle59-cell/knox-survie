@@ -16,6 +16,8 @@ const articles = {
   <circle cx="320" cy="220" r="42"  fill="none" stroke="#ffb02e" stroke-width="1.8"/>
   <circle cx="320" cy="220" r="4.5" fill="#ffb02e"/>
   <text x="320" y="203" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9d1b8">accroupi</text>
+  <text x="320" y="145" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9d1b8">marche</text>
+  <text x="320" y="100" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9d1b8">course</text>
   <text x="320" y="18"  text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#ff6a4d">coup de feu / moteur</text>
 </svg>`},
       {type:'callout', label:'RÈGLE D’OR', text:'Un coup de feu ou une course en ville sans plan reste le moyen le plus fiable de mourir. Tout le reste du manuel découle de ce principe.'}
