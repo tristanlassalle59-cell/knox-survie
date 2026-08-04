@@ -2,11 +2,57 @@ let stack = [{kind:'menu', key:'root'}];
 let hlIndex = 0;
 let selectableCount = 0;
 
+let soundEnabled = localStorage.getItem('knoxSound') === 'on';
+let audioCtx = null;
+
+function beep(freq, duration, volume, type){
+  if (!soundEnabled) return;
+  if (!audioCtx){ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+  if (audioCtx.state === 'suspended'){ audioCtx.resume(); }
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type || 'square';
+  osc.frequency.value = freq;
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  const now = audioCtx.currentTime;
+  gain.gain.setValueAtTime(volume, now);
+  gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+  osc.start(now);
+  osc.stop(now + duration);
+}
+
+function playMove(){ beep(720, 0.02, 0.02); }
+function playConfirm(){ beep(980, 0.05, 0.03); }
+function playBack(){ beep(480, 0.06, 0.03); }
+function playDeny(){ beep(160, 0.12, 0.025, 'sawtooth'); }
+
+function setupSoundToggle(){
+  const btn = document.getElementById('sound-toggle');
+  if (!btn) return;
+  const sync = () => {
+    btn.textContent = 'SON: ' + (soundEnabled ? 'ON' : 'OFF');
+    btn.classList.toggle('on', soundEnabled);
+  };
+  sync();
+  btn.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('knoxSound', soundEnabled ? 'on' : 'off');
+    sync();
+    if (soundEnabled){
+      if (!audioCtx){ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+      if (audioCtx.state === 'suspended'){ audioCtx.resume(); }
+      playConfirm();
+    }
+  });
+}
+setupSoundToggle();
+
 function topScreen(){ return stack[stack.length - 1]; }
 
 function push(entry){ stack.push(entry); hlIndex = 0; render(); }
 
-function pop(){ if (stack.length > 1){ stack.pop(); hlIndex = 0; render(); } }
+function pop(){ if (stack.length > 1){ playBack(); stack.pop(); hlIndex = 0; render(); } }
 
 function activeMenuEntry(){
   const s = topScreen();
@@ -88,7 +134,7 @@ function renderMenuPane(entry, isActive, currentLeaf){
 
   if (isActive){
     selectableCount = node.items.length + offset;
-    setHighlight(0);
+    setHighlight(0, true);
   }
 }
 
@@ -160,7 +206,7 @@ function renderLeaf(path, textContent, extraNode, navButtons){
   pane.appendChild(wrap);
 
   selectableCount = leafActions.length;
-  setHighlight(0);
+  setHighlight(0, true);
 }
 
 function renderBlock(block){
@@ -231,6 +277,7 @@ function articleOrder(){
 }
 
 function goToArticle(key){
+  playConfirm();
   stack[stack.length - 1] = {kind:'article', key};
   hlIndex = 0;
   render();
@@ -253,11 +300,12 @@ function renderArticle(art, key){
   renderLeaf(art.path, null, extra, navButtons);
 }
 
-function setHighlight(i){
+function setHighlight(i, silent){
   hlIndex = i;
   document.querySelectorAll('.menu-item, .retour, .art-nav-btn').forEach(el => el.classList.remove('hl'));
   const el = document.getElementById('sel-' + hlIndex);
   if (el) el.classList.add('hl');
+  if (!silent) playMove();
 }
 
 function selectItem(i){
@@ -269,12 +317,14 @@ function selectItem(i){
 
   if (it.action.type === 'stub'){
     flashPress(i);
+    playDeny();
     const m = document.getElementById('stub-msg');
     if (m){ m.textContent = it.action.msg; m.style.display = 'block'; }
     return;
   }
 
   const entry = {kind: it.action.type, key: it.action.key};
+  playConfirm();
   if (leafActive){
     // un détail est déjà affiché (colonne de droite) : on le remplace directement
     stack[stack.length - 1] = entry;
