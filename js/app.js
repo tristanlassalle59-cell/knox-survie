@@ -2,28 +2,57 @@ let stack = [{kind:'menu', key:'root'}];
 let hlIndex = 0;
 let selectableCount = 0;
 
-let soundEnabled = localStorage.getItem('knoxSound') === 'on';
+let soundEnabled = localStorage.getItem('knoxSound') !== 'off';
 let audioCtx = null;
+
+function ensureAudio(){
+  if (!audioCtx){ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+  if (audioCtx.state === 'suspended'){ audioCtx.resume(); }
+  return audioCtx;
+}
 
 function beep(freq, duration, volume, type){
   if (!soundEnabled) return;
-  if (!audioCtx){ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-  if (audioCtx.state === 'suspended'){ audioCtx.resume(); }
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
+  const ctx = ensureAudio();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
   osc.type = type || 'square';
   osc.frequency.value = freq;
   osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  const now = audioCtx.currentTime;
+  gain.connect(ctx.destination);
+  const now = ctx.currentTime;
   gain.gain.setValueAtTime(volume, now);
   gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
   osc.start(now);
   osc.stop(now + duration);
 }
 
+function playClickSound(){
+  if (!soundEnabled) return;
+  const ctx = ensureAudio();
+  const duration = 0.02;
+  const size = Math.max(1, Math.floor(ctx.sampleRate * duration));
+  const buffer = ctx.createBuffer(1, size, ctx.sampleRate);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < size; i++){
+    data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / size, 3);
+  }
+  const noise = ctx.createBufferSource();
+  noise.buffer = buffer;
+  const filter = ctx.createBiquadFilter();
+  filter.type = 'bandpass';
+  filter.frequency.value = 1100;
+  filter.Q.value = 0.9;
+  const gain = ctx.createGain();
+  gain.gain.value = 0.22;
+  noise.connect(filter);
+  filter.connect(gain);
+  gain.connect(ctx.destination);
+  noise.start();
+}
+
 function playMove(){ beep(720, 0.02, 0.02); }
-function playConfirm(){ beep(980, 0.05, 0.03); }
+function playConfirm(){ playClickSound(); }
 function playBack(){ beep(480, 0.06, 0.03); }
 function playDeny(){ beep(160, 0.12, 0.025, 'sawtooth'); }
 
@@ -40,8 +69,7 @@ function setupSoundToggle(){
     localStorage.setItem('knoxSound', soundEnabled ? 'on' : 'off');
     sync();
     if (soundEnabled){
-      if (!audioCtx){ audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
-      if (audioCtx.state === 'suspended'){ audioCtx.resume(); }
+      ensureAudio();
       playConfirm();
     }
   });
