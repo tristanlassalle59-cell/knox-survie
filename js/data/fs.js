@@ -3,54 +3,48 @@ const nodes = {
     path: '/KNOX_SURVIE',
     items: [
       {label:'LISEZ_MOI_DABORD.txt', tag:'[TXT]', action:{type:'file', key:'lisez_moi'}},
-      {label:'01_MANUELS', tag:'[DIR]', action:{type:'menu', key:'manuels'}},
-      {label:'02_ROLES_ET_COMPETENCES', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
-      {label:'03_OUTILS', tag:'[DIR]', action:{type:'menu', key:'outils'}},
-      {label:'04_REFERENCE_TERRAIN', tag:'[DIR]', action:{type:'menu', key:'reference_terrain'}},
+      {label:'01_PREMIERS_JOURS', tag:'[DIR]', action:{type:'menu', key:'premiers_jours'}},
+      {label:'02_S_INSTALLER', tag:'[DIR]', action:{type:'menu', key:'s_installer'}},
+      {label:'03_DURER', tag:'[DIR]', action:{type:'menu', key:'durer'}},
       {label:'PERSONNEL', tag:'[DIR]', action:{type:'menu', key:'personnel'}},
+    ]
+  },
+  premiers_jours: {
+    path: '/KNOX_SURVIE/01_PREMIERS_JOURS',
+    items: [
+      {label:'Le bruit te trahit', tag:'[ART]', action:{type:'article', key:'bruit'}},
+      {label:'Santé & système médical', tag:'[ART]', action:{type:'article', key:'sante'}},
+      {label:'Fatigue & sommeil', tag:'[ART]', action:{type:'article', key:'fatigue'}},
+      {label:'Combat & tactique', tag:'[ART]', action:{type:'article', key:'combat'}},
+      {label:'Gestion de l’inventaire', tag:'[ART]', action:{type:'article', key:'inventaire'}},
+      {label:'Météo & saisons', tag:'[ART]', action:{type:'article', key:'meteo'}},
+      {label:'Gestion des cadavres', tag:'[ART]', action:{type:'article', key:'cadavres'}},
+      {label:'Erreurs qui coûtent cher', tag:'[ART]', action:{type:'article', key:'erreurs'}},
+    ]
+  },
+  s_installer: {
+    path: '/KNOX_SURVIE/02_S_INSTALLER',
+    items: [
+      {label:'Choisir & sécuriser sa base', tag:'[ART]', action:{type:'article', key:'base'}},
+      {label:'Véhicules', tag:'[ART]', action:{type:'article', key:'vehicules'}},
+      {label:'Vivre en groupe', tag:'[ART]', action:{type:'article', key:'groupe'}},
+      {label:'À chacun son rôle', tag:'[ART]', action:{type:'article', key:'role'}},
+      {label:'Difficulté croissante', tag:'[ART]', action:{type:'article', key:'difficulte'}},
+    ]
+  },
+  durer: {
+    path: '/KNOX_SURVIE/03_DURER',
+    items: [
+      {label:'Eau, nourriture & élevage', tag:'[ART]', action:{type:'article', key:'eau'}},
+      {label:'Chasse, piégeage & pêche', tag:'[ART]', action:{type:'article', key:'chasse'}},
+      {label:'Agriculture', tag:'[ART]', action:{type:'article', key:'agriculture'}},
+      {label:'Artisanat & autosuffisance', tag:'[ART]', action:{type:'article', key:'artisanat'}},
     ]
   },
   personnel: {
     path: '/KNOX_SURVIE/PERSONNEL',
     items: [
       {label:'journal.txt', tag:'[TXT]', action:{type:'file', key:'journal'}},
-    ]
-  },
-  outils: {
-    path: '/KNOX_SURVIE/03_OUTILS',
-    items: [
-      {label:'explorateur_artisanat.html', tag:'[APP]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
-    ]
-  },
-  reference_terrain: {
-    path: '/KNOX_SURVIE/04_REFERENCE_TERRAIN',
-    items: [
-      {label:'01 — Santé approfondie', tag:'[ART]', action:{type:'article', key:'ref01'}},
-      {label:'02 — Artisanat : les 12 filières', tag:'[ART]', action:{type:'article', key:'ref02'}},
-      {label:'03 — Chasse, piégeage & pêche', tag:'[ART]', action:{type:'article', key:'ref03'}},
-      {label:'04 — Élevage', tag:'[ART]', action:{type:'article', key:'ref04'}},
-      {label:'05 — Agriculture', tag:'[ART]', action:{type:'article', key:'ref05'}},
-      {label:'06 — Véhicules & mécanique', tag:'[ART]', action:{type:'article', key:'ref06'}},
-    ]
-  },
-  manuels: {
-    path: '/KNOX_SURVIE/01_MANUELS',
-    items: [
-      {label:'01 — Le bruit te trahit', tag:'[ART]', action:{type:'article', key:'art01'}},
-      {label:'02 — Santé & système médical', tag:'[ART]', action:{type:'article', key:'art02'}},
-      {label:'03 — Fatigue & sommeil', tag:'[ART]', action:{type:'article', key:'art03'}},
-      {label:'04 — Choisir & sécuriser sa base', tag:'[ART]', action:{type:'article', key:'art04'}},
-      {label:'05 — Eau, nourriture & élevage', tag:'[ART]', action:{type:'article', key:'art05'}},
-      {label:'06 — Combat & tactique', tag:'[ART]', action:{type:'article', key:'art06'}},
-      {label:'07 — Météo & saisons', tag:'[ART]', action:{type:'article', key:'art07'}},
-      {label:'08 — Gestion de l’inventaire', tag:'[ART]', action:{type:'article', key:'art08'}},
-      {label:'09 — Véhicules', tag:'[ART]', action:{type:'article', key:'art09'}},
-      {label:'10 — Compétences & traits', tag:'[ART]', action:{type:'article', key:'art10'}},
-      {label:'11 — Artisanat & autosuffisance', tag:'[ART]', action:{type:'article', key:'art11'}},
-      {label:'12 — Gestion des cadavres', tag:'[ART]', action:{type:'article', key:'art12'}},
-      {label:'13 — Difficulté croissante', tag:'[ART]', action:{type:'article', key:'art13'}},
-      {label:'14 — Spécificités multijoueur', tag:'[ART]', action:{type:'article', key:'art14'}},
-      {label:'15 — Erreurs qui coûtent cher', tag:'[ART]', action:{type:'article', key:'art15'}},
     ]
   },
 };

@@ -110,11 +110,9 @@ Système de navigation par **pile** (stack), déjà implémenté dans le checkpo
 - Trois types de rendu : `renderMenu` (liste sélectionnable), `renderLeaf` (fichier
   texte simple), `renderArticle` (accroche + puces + encart façon "règle d'or")
 
-**Recommandation pour la suite** : le fichier est un seul gros HTML pour l'instant
-(CSS + données + logique tout inline). Pour porter 25 articles proprement, ça vaut
-le coup de séparer en plusieurs fichiers (ex: `style.css`, `data/tome1.js`,
-`data/tome2.js`, `app.js`, `index.html`) plutôt que de continuer à tout empiler
-dans un seul fichier.
+Séparé en plusieurs fichiers : `style.css`, `data/fs.js` (arborescence),
+`data/phase1.js` / `data/phase2.js` / `data/phase3.js` (articles par phase),
+`app.js`, `index.html` — voir "Décisions actées" plus bas pour le détail.
 
 ## Bugs déjà rencontrés et corrigés (à ne pas réintroduire)
 
@@ -127,43 +125,82 @@ dans un seul fichier.
 3. **`function top()`** entre en conflit avec `window.top` (référence réservée
    du navigateur) — utiliser un autre nom (`topScreen()` par exemple).
 
-## Arborescence prévue du "disque" (menu racine)
+## Arborescence du "disque" (menu racine)
+
+**Restructuration complète actée : plus de découpage par tome (Tome 1 / Tome 2),
+l'arborescence suit la vraie progression d'une partie : survie immédiate →
+installation → autosuffisance long terme.** Chaque thème n'a plus qu'un seul
+article, même quand la matière venait des deux tomes à l'origine (voir "Règle
+de fusion" ci-dessous).
 
 ```
 /KNOX_SURVIE/
 ├── LISEZ_MOI_DABORD.txt          [fait, contenu réel]
-├── 01_MANUELS/                    [liste plate des articles, pas de sous-dossier par tome —
-│                                    on ne présente plus le contenu comme des documents PDF
-│                                    séparés, le terminal est le seul guide]
-│   └── 01 à 15 (Tome 1)                  [Tome 1 complet, porté]
-├── 02_ROLES_ET_COMPETENCES/       [stub, pas construit — voir note Tome 2 ci-dessous]
-├── 03_OUTILS/
-│   └── explorateur_artisanat.html [stub, pas construit]
-│       (configurateur_survie.html retiré du menu — incompatible full RP,
-│        voir "Règle du full RP" plus bas ; fichier conservé dans tools/
-│        comme lien à partager hors-terminal si besoin)
-├── 04_REFERENCE_TERRAIN/          [6 articles du Tome 2, filtrés RP — voir note ci-dessous]
+├── 01_PREMIERS_JOURS/             [survie immédiate — 8 articles]
+│   ├── Le bruit te trahit
+│   ├── Santé & système médical           [FUSION base + approfondi]
+│   ├── Fatigue & sommeil
+│   ├── Combat & tactique
+│   ├── Gestion de l'inventaire
+│   ├── Météo & saisons
+│   ├── Gestion des cadavres
+│   └── Erreurs qui coûtent cher          [clôture de phase, transition implicite]
+├── 02_S_INSTALLER/                [installation durable — 5 articles]
+│   ├── Choisir & sécuriser sa base
+│   ├── Véhicules                          [FUSION base + entretien/mécanique]
+│   ├── Vivre en groupe                    [reformulé RP, ex-"spécificités multijoueur"]
+│   ├── À chacun son rôle                  [reformulé RP, ex-"compétences & traits"]
+│   └── Difficulté croissante              [clôture de phase, transition implicite]
+├── 03_DURER/                      [autosuffisance long terme — 4 articles]
+│   ├── Eau, nourriture & élevage           [FUSION intro + élevage détaillé]
+│   ├── Chasse, piégeage & pêche
+│   ├── Agriculture
+│   └── Artisanat & autosuffisance          [FUSION intro + les 12 filières]
 └── PERSONNEL/
     └── journal.txt                [fait, branché dans le terminal, voir contenu plus bas]
 ```
 
+17 articles au total (21 avant fusion). `03_OUTILS` et `02_ROLES_ET_COMPETENCES`
+(les anciens dossiers) ont disparu : leur seul contenu utilisable a été absorbé
+dans les phases ci-dessus (`À chacun son rôle`), le reste (configurateur,
+explorateur d'artisanat jamais construit) n'avait pas sa place ou n'existait pas.
+
+### Règle de fusion (la plus importante pour tout contenu à venir)
+
+Chaque paire d'articles qui couvrait le même thème (un du Tome 1 "essentiel", un
+du Tome 2 "approfondi") devient **un seul article**, jamais deux à la suite.
+Structure interne systématique : on commence par l'essentiel/le vital (l'ancien
+Tome 1), on termine par l'approfondi/le fin (l'ancien Tome 2), sans jamais répéter
+l'accroche ou l'intro une deuxième fois, et sans aucun renvoi du type "comme vu
+précédemment" qui présupposerait l'ancien découpage. La longueur n'est pas un
+problème : ce qui compte, c'est que tout y soit, trié dans une progression
+logique d'importance. 4 fusions ont eu lieu : Santé, Véhicules, et les deux
+volets d'Autosuffisance (Eau/élevage, Artisanat).
+
+Les deux articles-charnières en fin de phase (**Erreurs qui coûtent cher** en fin
+de Phase 1, **Difficulté croissante** en fin de Phase 2) portent une courte
+retouche de fin qui amène implicitement vers l'idée de la phase suivante — jamais
+une phrase explicite du type "passons à la suite".
+
 ### Note : contenu du Tome 2 filtré pour rester dans la fiction
 
-Le Tome 2 source (`Sources/Manuel_Technique_Tome2_Illustre.html`) contient 10 articles,
-mais 4 d'entre eux s'adressent explicitement au groupe de joueurs réel (réglages
-serveur/mods, répartition des rôles "selon votre nombre de joueurs", commandes
-d'administration serveur, liens vers des sites externes comme pzwiki.net) — Kessler,
-personnage fictif de 2026, ne peut pas les avoir écrits. **Décision actée : ces 4
-articles ne sont PAS portés dans le terminal, nulle part, y compris dans 03_OUTILS.**
-Seuls les 6 articles compatibles avec la fiction sont dans `04_REFERENCE_TERRAIN`
-(santé approfondie, artisanat détaillé, chasse/pêche, élevage, agriculture,
-véhicules/mécanique) — reformulés au passage pour retirer le jargon de jeu qui
-cassait le 4e mur (XP, "vanilla", références de version B41/B42, capacité serveur/RAM,
-etc.), tout en gardant le contenu pratique intact.
+Le Tome 2 source (`Sources/Manuel_Technique_Tome2_Illustre.html`) contenait 10
+articles, mais 4 d'entre eux s'adressaient explicitement au groupe de joueurs réel
+(réglages serveur/mods, répartition des rôles "selon votre nombre de joueurs",
+commandes d'administration serveur, liens vers des sites externes comme
+pzwiki.net) — Kessler, personnage fictif de 2026, ne peut pas les avoir écrits.
+**Décision actée : ces 4 articles ne sont PAS portés dans le terminal, nulle
+part.** Les 6 articles compatibles avec la fiction ont été repris, 4 fusionnés
+dans leur équivalent Tome 1 (santé, véhicules, élevage, artisanat) et 2 restés
+autonomes (chasse/pêche, agriculture) — reformulés au passage pour retirer le
+jargon de jeu qui cassait le 4e mur (XP, "vanilla", références de version
+B41/B42, capacité serveur/RAM, etc.), tout en gardant le contenu pratique intact.
 
-`02_ROLES_ET_COMPETENCES` reste un stub : le seul contenu source qui aurait pu y
-aller est justement l'un des 4 articles exclus. Ne pas y remettre de contenu sans
-l'écrire réellement dans la voix de Kessler (pas d'extraction possible ici).
+`Vivre en groupe` et `À chacun son rôle` sont partiellement réécrits (pas une
+extraction directe) : leurs sources (Tome 1 "Spécificités multijoueur" et
+"Compétences & traits", Tome 2 "Création de personnage & répartition des rôles")
+contenaient trop de références au groupe réel ou aux mécaniques de jeu pour être
+copiées telles quelles.
 
 ## Contenu déjà écrit (à réutiliser tel quel)
 
@@ -219,23 +256,14 @@ Le fichier s'arrête là. Rien après le Jour 8 — voir la section lore ci-dess
 pour pourquoi cet écart avec le "jour 10" du boot est volontaire et ne doit
 jamais être expliqué.
 
-**Les 15 titres du Tome 1** (dans l'ordre, du plus vital au moins critique) :
-01 Le bruit te trahit *(déjà porté intégralement)* · 02 Santé & système médical ·
-03 Fatigue & sommeil · 04 Choisir & sécuriser sa base · 05 Eau, nourriture & élevage ·
-06 Combat & tactique · 07 Météo & saisons · 08 Gestion de l'inventaire · 09 Véhicules ·
-10 Compétences & traits · 11 Artisanat & autosuffisance · 12 Gestion des cadavres ·
-13 Difficulté croissante · 14 Spécificités multijoueur · 15 Erreurs qui coûtent cher
-
-Le contenu complet de ces 15 articles existe déjà dans
-`Sources/Manuel_Survie_Knox_County_Illustre.html` (converti depuis le PDF d'origine,
-fourni dans ce dossier) — à extraire article par article plutôt qu'à réécrire.
-
-Le Tome 2 source (10 articles techniques) existe dans
-`Sources/Manuel_Technique_Tome2_Illustre.html` (converti depuis le docx d'origine,
-fourni dans ce dossier) — **seuls 6 des 10 sont portés** (voir la note de filtrage
-RP dans la section arborescence ci-dessus). Les 6 portés vivent dans `js/data/tome2.js`
-sous `04_REFERENCE_TERRAIN` : santé approfondie, artisanat détaillé, chasse/pêche,
-élevage, agriculture, véhicules & mécanique.
+**Les 17 articles** sont répartis en 3 phases (voir l'arborescence plus haut) et
+tous portés intégralement. Sources d'origine :
+`Sources/Manuel_Survie_Knox_County_Illustre.html` (Tome 1, converti depuis le PDF)
+et `Sources/Manuel_Technique_Tome2_Illustre.html` (Tome 2, converti depuis le docx)
+— ces deux fichiers restent la référence si un article doit être retouché ou si le
+contenu source doit être revérifié, mais le contenu vivant est entièrement dans
+`js/data/phase1.js` / `phase2.js` / `phase3.js`, plus dans l'ancien découpage par
+tome.
 
 ## Décisions actées (validées avec l'utilisateur — ne pas remettre en question)
 
@@ -245,15 +273,16 @@ URL, sans téléchargement. Conséquence directe : **structurer en plusieurs fic
 dès le départ (pas un HTML monolithique), puisqu'il n'y a plus besoin de pouvoir
 envoyer un fichier unique par Discord.
 
-Structure de fichiers suggérée :
+Structure de fichiers :
 ```
 index.html
 css/style.css
 js/app.js          (moteur de navigation + rendu)
-js/data/tome1.js   (les 15 articles)
-js/data/tome2.js   (6 des 10 articles du Tome 2, filtrés RP)
-js/data/fs.js      (arborescence du disque)
-tools/configurateur.html
+js/data/fs.js      (arborescence du disque, 3 phases)
+js/data/phase1.js  (8 articles — 01_PREMIERS_JOURS)
+js/data/phase2.js  (5 articles — 02_S_INSTALLER)
+js/data/phase3.js  (4 articles — 03_DURER)
+tools/configurateur.html  (hors terminal, non relié au menu — voir Règle du full RP)
 ```
 
 ### Responsive : deux colonnes sur grand écran, un panneau sur mobile
@@ -276,9 +305,26 @@ la pile de navigation, que ce soit l'écran actif ou celui qui a ouvert le conte
 actuellement affiché).
 
 ### Navigation article suivant / précédent
-Chaque écran d'article doit proposer, en bas, un moyen d'aller à l'article suivant
-ou précédent sans repasser par le menu. Lire 15 articles d'affilée en remontant à
-chaque fois est trop pénible.
+Chaque écran d'article propose, en bas, un moyen d'aller à l'article suivant ou
+précédent sans repasser par le menu. La séquence est **globale et continue sur
+les 17 articles, phase par phase** (`PHASE_ORDER` dans `js/app.js`) : aux deux
+jonctions de phase (fin Phase 1 → début Phase 2, fin Phase 2 → début Phase 3),
+"suivant" enchaîne directement sur le premier article de la phase suivante —
+choix délibéré plutôt qu'un retour au menu, pour permettre une lecture continue
+de bout en bout façon vraie progression de partie. Le panneau menu à gauche
+bascule automatiquement sur la nouvelle phase quand on franchit une jonction
+(`goToArticle` met à jour le niveau menu de la pile, pas seulement l'article).
+Seuls les deux articles aux extrémités absolues (premier de Phase 1, dernier de
+Phase 3) n'ont respectivement pas de "précédent" / pas de "suivant".
+
+### Sommaire interne auto-généré
+Tout article contenant **2 blocs `subtitle` ou plus** reçoit automatiquement un
+petit sommaire cliquable juste après la tagline (ou après le premier bloc s'il
+n'y a pas de tagline). Chaque entrée renvoie à sa section par défilement fluide,
+sans quitter l'article. Générique et basé uniquement sur la détection des blocs
+au rendu (`renderArticle` dans `js/app.js`) — **jamais codé en dur article par
+article**. Fonctionne identiquement en desktop (deux colonnes) et en mobile
+(panneau unique).
 
 ### Schéma de données des articles : liste de blocs typés
 
@@ -314,12 +360,16 @@ Types de blocs à supporter (dérivés du contenu réel des deux tomes) :
 **Le type `figure` est volontairement défini dès maintenant alors qu'aucun article
 ne l'utilise encore.** Les schémas seront ajoutés dans un second temps (décision
 explicite : d'abord tout le texte, les schémas après). Le prévoir dans le schéma
-évite d'avoir à refactoriser les 25 articles au moment de les ajouter.
+évite d'avoir à refactoriser les articles au moment de les ajouter.
 
 Note sur les schémas à venir : 9 planches SVG existent pour le Tome 1 et 6 pour le
 Tome 2, mais dans une palette papier/encre/rouille (`#e7dfc6`, `#2a271f`, `#8a3324`)
 prévue pour un PDF façon parchemin. Elles devront être **recolorées** vers la palette
 ambre/CRT et probablement resimplifiées pour l'écran — ce n'est pas un copier-coller.
+Depuis la restructuration en 3 phases, les schémas des articles fusionnés (Santé,
+Véhicules, Eau/élevage, Artisanat) doivent viser les **nouveaux identifiants**
+(`sante`, `vehicules`, `eau`, `artisanat` dans `js/data/phase1.js` / `phase2.js` /
+`phase3.js`), plus les anciens `art02`/`ref01` etc. qui n'existent plus.
 
 ## Idées pour plus tard (ne pas traiter maintenant)
 
@@ -329,9 +379,6 @@ ambre/CRT et probablement resimplifiées pour l'écran — ce n'est pas un copie
   n'a de sens qu'une fois le contenu en place.
 - **Accessibilité clavier poussée** : focus visible au tab, Échap pour revenir en
   arrière. La nav flèches+Entrée existe déjà et suffit pour l'usage réel.
-- **Modules non construits** : `02_ROLES_ET_COMPETENCES` (pas de contenu source
-  compatible avec la fiction, voir note Tome 2 plus haut), `explorateur_artisanat.html`
-  (aucun contenu source identifié pour l'instant).
 
 ## Méthode de travail préférée
 
@@ -342,11 +389,11 @@ petit incrément à la fois, testé, montré, validé, puis on continue.
 
 ## Prochaine étape suggérée (à confirmer avec l'utilisateur, pas à lancer seul)
 
-1. Découper le HTML monolithique actuel en la structure de fichiers décrite plus haut
-2. Refactoriser l'article 01 déjà porté vers le nouveau schéma de blocs typés
-3. Ajouter la nav suivant/précédent et le responsive mobile
-4. Porter l'article 02 (Santé) comme test du gabarit sur un article plus long
-   avec sous-titres — vérifier que le schéma de blocs tient
-5. Seulement ensuite, porter les 13 articles restants du Tome 1
+Les 17 articles sont tous portés, fusionnés et organisés en 3 phases. Reste,
+dans le désordre et sans urgence particulière :
 
-Les schémas viennent après, une fois tout le texte en place.
+- Les schémas SVG (9 pour le Tome 1, 6 pour le Tome 2) — recolorage ambre/CRT,
+  ciblage des nouveaux identifiants d'articles fusionnés (voir note plus haut)
+- Easter eggs / worldbuilding, une fois qu'on a envie de s'y remettre
+- Réévaluer si `03_OUTILS` / `explorateur_artisanat.html` méritent de revenir
+  sous une forme ou une autre, ou si le disque reste à 3 phases + PERSONNEL

@@ -298,23 +298,65 @@ function renderBlock(block){
   return document.createElement('div');
 }
 
+const PHASE_ORDER = ['premiers_jours', 's_installer', 'durer'];
+
 function articleOrder(){
-  const entry = activeMenuEntry();
-  return nodes[entry.key].items
-    .filter(it => it.action && it.action.type === 'article')
-    .map(it => it.action.key);
+  return PHASE_ORDER.flatMap(menuKey =>
+    nodes[menuKey].items
+      .filter(it => it.action && it.action.type === 'article')
+      .map(it => it.action.key)
+  );
+}
+
+function menuKeyForArticle(articleKey){
+  return PHASE_ORDER.find(menuKey =>
+    nodes[menuKey].items.some(it => it.action && it.action.type === 'article' && it.action.key === articleKey)
+  );
 }
 
 function goToArticle(key){
   playConfirm();
+  const menuKey = menuKeyForArticle(key);
+  if (menuKey){ stack[stack.length - 2] = {kind:'menu', key: menuKey}; }
   stack[stack.length - 1] = {kind:'article', key};
   hlIndex = 0;
   render();
 }
 
+function buildArticleToc(subtitleBlocks){
+  const toc = document.createElement('div');
+  toc.className = 'art-toc';
+  subtitleBlocks.forEach((block, i) => {
+    const item = document.createElement('div');
+    item.className = 'art-toc-item';
+    item.textContent = block.text;
+    item.addEventListener('click', () => {
+      document.getElementById('toc-target-' + i)?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+    toc.appendChild(item);
+  });
+  return toc;
+}
+
 function renderArticle(art, key){
   const extra = document.createElement('div');
-  art.blocks.forEach(block => extra.appendChild(renderBlock(block)));
+  const subtitleBlocks = art.blocks.filter(b => b.type === 'subtitle');
+  let subtitleIndex = 0;
+  let firstEl = null;
+
+  art.blocks.forEach(block => {
+    const el = renderBlock(block);
+    if (block.type === 'subtitle'){
+      el.id = 'toc-target-' + subtitleIndex;
+      subtitleIndex++;
+    }
+    if (!firstEl) firstEl = el;
+    extra.appendChild(el);
+  });
+
+  if (subtitleBlocks.length >= 2){
+    extra.insertBefore(buildArticleToc(subtitleBlocks), firstEl.nextSibling);
+  }
 
   const order = articleOrder();
   const idx = order.indexOf(key);
