@@ -295,6 +295,18 @@ function renderBlock(block){
     });
     return grid;
   }
+  if (block.type === 'figure'){
+    const wrap = document.createElement('div');
+    wrap.className = 'art-figure';
+    wrap.innerHTML = block.svg;
+    if (block.caption){
+      const cap = document.createElement('div');
+      cap.className = 'art-figure-caption';
+      cap.textContent = block.caption;
+      wrap.appendChild(cap);
+    }
+    return wrap;
+  }
   return document.createElement('div');
 }
 

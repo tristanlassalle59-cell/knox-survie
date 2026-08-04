@@ -355,21 +355,62 @@ Types de blocs à supporter (dérivés du contenu réel des deux tomes) :
 | `bullets` | `items[]` | Liste à puces (le gros du contenu) |
 | `callout` | `label`, `text` | Encart encadré (ex: "RÈGLE D'OR") |
 | `cards` | `items[{title, text}]` | Grille de petites cartes |
-| `figure` | `src`, `caption` | Schéma — **prévu mais pas encore utilisé** |
+| `figure` | `svg`, `caption` | Schéma SVG inline — voir "Style des schémas" ci-dessous |
 
-**Le type `figure` est volontairement défini dès maintenant alors qu'aucun article
-ne l'utilise encore.** Les schémas seront ajoutés dans un second temps (décision
-explicite : d'abord tout le texte, les schémas après). Le prévoir dans le schéma
-évite d'avoir à refactoriser les articles au moment de les ajouter.
+**Le type `figure` a été défini bien avant d'être utilisé** (décision explicite :
+d'abord tout le texte, les schémas après). Le prévoir dans le schéma dès le début
+a évité d'avoir à refactoriser les articles au moment de les ajouter. `svg`
+contient le code SVG inline complet (string), injecté tel quel dans le DOM par
+`renderBlock` — pas un chemin de fichier, pas d'illustrations importées.
 
-Note sur les schémas à venir : 9 planches SVG existent pour le Tome 1 et 6 pour le
-Tome 2, mais dans une palette papier/encre/rouille (`#e7dfc6`, `#2a271f`, `#8a3324`)
-prévue pour un PDF façon parchemin. Elles devront être **recolorées** vers la palette
-ambre/CRT et probablement resimplifiées pour l'écran — ce n'est pas un copier-coller.
-Depuis la restructuration en 3 phases, les schémas des articles fusionnés (Santé,
-Véhicules, Eau/élevage, Artisanat) doivent viser les **nouveaux identifiants**
-(`sante`, `vehicules`, `eau`, `artisanat` dans `js/data/phase1.js` / `phase2.js` /
-`phase3.js`), plus les anciens `art02`/`ref01` etc. qui n'existent plus.
+## Style des schémas (grammaire visuelle validée — à respecter à l'identique)
+
+Code de référence, premier schéma validé par l'utilisateur (rayons sonores,
+article "Le bruit te trahit") :
+
+```svg
+<svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="320" cy="220" r="190" fill="none" stroke="#ffb02e" stroke-width="1.4" stroke-opacity="0.9" stroke-dasharray="3 5"/>
+  <circle cx="320" cy="220" r="140" fill="none" stroke="#ffb02e" stroke-width="1.4" stroke-opacity="0.75" stroke-dasharray="3 5"/>
+  <circle cx="320" cy="220" r="90"  fill="none" stroke="#ffb02e" stroke-width="1.6" stroke-opacity="0.9"/>
+  <circle cx="320" cy="220" r="42"  fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <circle cx="320" cy="220" r="4.5" fill="#ffb02e"/>
+  <text x="320" y="203" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9d1b8">accroupi</text>
+  <text x="320" y="18"  text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#ff6a4d">coup de feu / moteur</text>
+</svg>
+```
+
+Principes à appliquer à tout schéma, sans exception :
+
+1. Trait fin, aucun remplissage (`fill="none"` sur les formes), pas d'illustration élaborée
+2. Éléments certains/mesurés en trait plein ; éléments approximatifs/théoriques en pointillé (`stroke-dasharray`)
+3. Une seule couleur d'accent (`#ffb02e`, l'ambre du terminal) + rouge (`#ff6a4d`) réservé exclusivement aux éléments de danger/urgence
+4. Labels en `font-family="monospace"`, petite taille (10-12px), jamais de texte long dans un schéma
+5. Fond transparent — jamais de fond dans le SVG lui-même, il hérite du fond sombre du terminal
+6. Vérifier que chaque label ne chevauche aucun trait (cercle, ligne) qui le traverserait — repositionner
+   le texte plutôt que d'ajouter un fond derrière (pas de fond = principe 5). Bug déjà rencontré : le label
+   "accroupi" du premier schéma traversait le cercle intérieur avant correction (y=185 → y=203).
+
+### Suivi des 8-9 schémas prévus
+
+Un schéma à la fois, montré et validé avant de passer au suivant.
+
+- [x] **Le bruit te trahit** — rayons sonores (code ci-dessus), intégré
+- [ ] **Santé & système médical** (`sante`) — arbre de décision : blessure visible ?
+      → morsure (danger, rouge) / griffure (traitable) ; pas de blessure → maladie
+- [ ] **Choisir & sécuriser sa base** (`base`) — plan au sol simplifié, accès annotés
+- [ ] **Combat & tactique** (`combat`) — encerclement en terrain ouvert (dangereux)
+      vs goulot d'étranglement (maîtrisable)
+- [ ] **Météo & saisons** (`meteo`) — bandes horizontales de pression/danger par saison
+- [ ] **Eau, nourriture & élevage** (`eau`) — cycle de routine en boucle
+- [ ] **Agriculture** (`agriculture`) — calendrier saisonnier des cultures
+- [ ] **Artisanat & autosuffisance** (`artisanat`) — filières classées par moment
+      d'intérêt (immédiat / semaine 1 / base stable)
+- [ ] **Véhicules** (`vehicules`) — optionnel, seulement si un schéma apporte
+      vraiment quelque chose ; sinon l'article reste sans figure
+
+Chaque schéma prend place dans son article au bon endroit narratif (pas
+systématiquement en tête), là où il illustre le mieux le propos.
 
 ## Idées pour plus tard (ne pas traiter maintenant)
 
@@ -392,8 +433,8 @@ petit incrément à la fois, testé, montré, validé, puis on continue.
 Les 17 articles sont tous portés, fusionnés et organisés en 3 phases. Reste,
 dans le désordre et sans urgence particulière :
 
-- Les schémas SVG (9 pour le Tome 1, 6 pour le Tome 2) — recolorage ambre/CRT,
-  ciblage des nouveaux identifiants d'articles fusionnés (voir note plus haut)
+- Les 8-9 schémas SVG (grammaire visuelle validée, voir "Style des schémas"
+  plus haut) — en cours, un à la fois
 - Easter eggs / worldbuilding, une fois qu'on a envie de s'y remettre
 - Réévaluer si `03_OUTILS` / `explorateur_artisanat.html` méritent de revenir
   sous une forme ou une autre, ou si le disque reste à 3 phases + PERSONNEL
