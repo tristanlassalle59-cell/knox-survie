@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Configurateur — Knox County</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=JetBrains+Mono:wght@400;700&display=swap');
+
+  :root{
+    --bg:#11150f;
+    --panel:#171d14;
+    --line:#3a4530;
+    --amber:#ffb02e;
+    --amber-dim:#8a6a2e;
+    --text:#c9d1b8;
+    --text-dim:#7d8870;
+    --danger:#d9634a;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;}
+  .screen{
+    max-width:720px;margin:0 auto;padding:22px 20px 30px;
+    background:
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px),
+      var(--bg);
+  }
+  .boot{
+    font-family:'Share Tech Mono',monospace;
+    color:var(--amber-dim);
+    font-size:11px;
+    letter-spacing:1px;
+    margin-bottom:14px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:10px;
+  }
+  h1{
+    font-family:'Share Tech Mono',monospace;
+    font-size:22px;
+    letter-spacing:3px;
+    color:var(--amber);
+    margin:0 0 4px;
+    text-shadow:0 0 8px rgba(255,176,46,0.35);
+  }
+  .sub{font-size:12px;color:var(--text-dim);margin:0 0 22px;}
+  .field{margin-bottom:20px;}
+  .field-label{
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--text-dim);margin-bottom:8px;display:flex;justify-content:space-between;
+  }
+  .field-label b{color:var(--amber);font-weight:400;}
+  input[type=range]{
+    -webkit-appearance:none;width:100%;height:2px;background:var(--line);outline:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:14px;height:14px;background:var(--amber);
+    border-radius:0;cursor:pointer;box-shadow:0 0 6px rgba(255,176,46,0.6);
+  }
+  .segmented{display:flex;gap:1px;border:1px solid var(--line);}
+  .segmented button{
+    flex:1;background:var(--panel);color:var(--text-dim);border:none;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:1px;
+    padding:10px 4px;cursor:pointer;text-transform:uppercase;
+  }
+  .segmented button.active{background:rgba(255,176,46,0.14);color:var(--amber);}
+  .segmented button:hover{color:var(--amber);}
+  .readout{
+    margin-top:26px;border:1px solid var(--line);background:var(--panel);
+    padding:18px 20px 20px;
+  }
+  .readout-head{
+    font-size:11px;letter-spacing:2px;color:var(--amber-dim);
+    border-bottom:1px dashed var(--line);padding-bottom:10px;margin-bottom:14px;
+    display:flex;justify-content:space-between;
+  }
+  .block{margin-bottom:16px;}
+  .block:last-child{margin-bottom:0;}
+  .block-title{
+    font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--amber);margin-bottom:6px;
+  }
+  .block-title::before{content:"▸ ";}
+  .block p{margin:0 0 4px;font-size:13px;line-height:1.55;color:var(--text);}
+  .block p.warn{color:var(--danger);}
+  .cursor{display:inline-block;width:7px;height:13px;background:var(--amber);
+    animation:blink 1s step-start infinite;vertical-align:-2px;}
+  @keyframes blink{50%{opacity:0;}}
+</style>
+</head>
+<body>
+<div class="screen">
+  <div class="boot">KNOX-CO TERMINAL v42.20 — LIAISON ÉTABLIE</div>
+  <h1>CONFIGURATEUR DE SURVIE</h1>
+  <p class="sub">Entre les paramètres de ta partie, le terminal calcule un guide de démarrage sur-mesure.</p>
+
+  <div class="field">
+    <div class="field-label">Nombre de joueurs <b id="players-out">2</b></div>
+    <input type="range" id="players" min="1" max="10" value="2" step="1">
+  </div>
+
+  <div class="field">
+    <div class="field-label">Niveau d'expérience</div>
+    <div class="segmented" id="level">
+      <button data-v="debutant" class="active">Débutant</button>
+      <button data-v="intermediaire">Intermédiaire</button>
+      <button data-v="veteran">Vétéran</button>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">Difficulté visée</div>
+    <div class="segmented" id="difficulty">
+      <button data-v="detente">Détente</button>
+      <button data-v="equilibree" class="active">Équilibrée</button>
+      <button data-v="hardcore">Hardcore</button>
+    </div>
+  </div>
+
+  <div class="readout" id="readout"></div>
+</div>
+
+<script>
+const state = { players: 2, level: 'debutant', difficulty: 'equilibree' };
+
+document.getElementById('players').addEventListener('input', e => {
+  state.players = parseInt(e.target.value);
+  document.getElementById('players-out').textContent = state.players;
+  render();
+});
+
+function wireSegmented(id, key){
+  const el = document.getElementById(id);
+  el.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      el.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state[key] = btn.dataset.v;
+      render();
+    });
+  });
+}
+wireSegmented('level', 'level');
+wireSegmented('difficulty', 'difficulty');
+
+function hebergement(p){
+  if (p <= 4) return `Mode Host intégré suffit — pas besoin de serveur dédié pour ${p} joueur${p>1?'s':''}.`;
+  const ram = 6 + Math.round(p * 0.5 * 10) / 10;
+  return `À partir de ${p} joueurs, un serveur dédié devient plus confortable. RAM conseillée : environ ${ram} Go.`;
+}
+
+function sandbox(level, diff){
+  const pop = {detente:'Faible', equilibree:'Normal', hardcore: level==='veteran'?'Élevé':'Normal'}[diff];
+  const vitesse = (diff==='hardcore' && level!=='debutant') ? 'Aléatoire (sprinteurs possibles)' : 'Marcheur';
+  const respawn = (diff==='hardcore' && level==='veteran') ? 'Faible, réactivée' : 'Aucune';
+  const perception = level==='debutant' ? 'Défauts, ne pas baisser' : (diff==='hardcore' ? 'Légèrement au-dessus des défauts' : 'Défauts');
+  return {pop, vitesse, respawn, perception};
+}
+
+function roles(p){
+  if (p === 1) return "Tu couvres toutes les fonctions. Priorise sécurité et construction ; artisanat avancé et autosuffisance attendent une base stable.";
+  if (p === 2) return "Chaque joueur couvre 3-4 fonctions. Priorité commune sur sécurité (1) et construction (3) avant tout le reste.";
+  if (p <= 4) return "Une fonction par personne, en fusionnant les plus légères : médical+logistique d'un côté, ravitaillement+autosuffisance de l'autre.";
+  return "Une fonction dédiée par personne, avec un rôle flottant qui comble les trous selon le moment (souvent sur l'artisanat avancé une fois la base stable).";
+}
+
+function traits(level){
+  if (level === 'debutant') return "Bricoleur, Fort/Costaud, Athlétique/En forme, Organisé. Reste sur des négatifs sans risque : Myope, Fumeur.";
+  if (level === 'intermediaire') return "Même socle (Bricoleur, Fort, Athlétique, Organisé) + Estomac fragile ou Insomniaque pour récupérer des points.";
+  return "Tu peux pousser plus loin : Bricoleur/Fort/Athlétique/Organisé + 2-3 négatifs cumulés (Fumeur, Estomac fragile, Insomniaque) pour maximiser les points investis ailleurs.";
+}
+
+function spawn(level, diff){
+  if (level === 'debutant') return "Rosewood — densité basse, loot suffisant, bon point de départ pour apprendre les mécaniques.";
+  if (level === 'intermediaire') return "Rosewood ou March Ridge — profils suburbains comparables, varie selon l'envie d'explorer du neuf.";
+  return diff === 'hardcore' ? "West Point ou périphérie de Louisville — densité élevée, loot de meilleure qualité, pour qui maîtrise déjà le bruit et l'encerclement." : "March Ridge ou Riverside — bon compromis loot/risque pour un joueur expérimenté qui ne cherche pas le pire.";
+}
+
+function render(){
+  const s = sandbox(state.level, state.difficulty);
+  document.getElementById('readout').innerHTML = `
+    <div class="readout-head"><span>SORTIE — GUIDE PERSONNALISÉ</span><span><span class="cursor"></span></span></div>
+    <div class="block">
+      <div class="block-title">Hébergement</div>
+      <p>${hebergement(state.players)}</p>
+    </div>
+    <div class="block">
+      <div class="block-title">Réglages sandbox zombies</div>
+      <p>Population : ${s.pop} · Vitesse : ${s.vitesse}</p>
+      <p>Réapparition : ${s.respawn} · Perception : ${s.perception}</p>
+    </div>
+    <div class="block">
+      <div class="block-title">Répartition des rôles</div>
+      <p>${roles(state.players)}</p>
+    </div>
+    <div class="block">
+      <div class="block-title">Traits recommandés</div>
+      <p>${traits(state.level)}</p>
+    </div>
+    <div class="block">
+      <div class="block-title">Spawn conseillé</div>
+      <p>${spawn(state.level, state.difficulty)}</p>
+    </div>
+  `;
+}
+render();
+</script>
+</body>
+</html>

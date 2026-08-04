@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manuel de survie — Knox County</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --paper:#e7dfc6;
+  --paper-dark:#d9cea8;
+  --ink:#2a271f;
+  --rust:#8a3324;
+  --olive:#4d5a3a;
+  --ocre:#c99a2e;
+  --faint:#5a5442;
+  --display:'Oswald','Arial Narrow','Helvetica Neue',sans-serif;
+  --mono:'IBM Plex Mono','DejaVu Sans Mono',Menlo,Consolas,monospace;
+  --hand:'Special Elite','Courier New',monospace;
+}
+
+*{box-sizing:border-box;}
+@page{ size:A4; margin:15mm 10mm 14mm 10mm; }
+
+html,body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--mono);
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+.doc{
+  max-width:880px;
+  margin:0 auto;
+  background:
+    radial-gradient(ellipse at top left, rgba(0,0,0,0.05), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(0,0,0,0.06), transparent 55%),
+    var(--paper);
+  border:2px solid var(--ink);
+}
+
+/* ---- impression : rien ne se coupe ---- */
+.header,.callout,.card,.grid,.footer,.sec-head,
+.figure,.fig-legend,.index{
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+.sec-head,.tagline{
+  break-after:avoid;
+  page-break-after:avoid;
+}
+.figure svg{ break-inside:avoid; page-break-inside:avoid; }
+
+/* ================= HEADER ================= */
+.header{
+  padding:32px 44px 24px;
+  border-bottom:3px double var(--ink);
+  position:relative;
+}
+.eyebrow{
+  font-family:var(--display);
+  font-weight:600;
+  letter-spacing:3px;
+  font-size:11.5px;
+  text-transform:uppercase;
+  color:var(--rust);
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:40px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  margin:8px 0 6px;
+  line-height:1.03;
+}
+.subtitle{
+  font-family:var(--hand);
+  font-size:13.5px;
+  color:var(--faint);
+}
+.stamp{
+  position:absolute;
+  top:28px; right:40px;
+  border:3px solid var(--rust);
+  color:var(--rust);
+  font-family:var(--display);
+  font-weight:700;
+  text-transform:uppercase;
+  padding:6px 12px;
+  transform:rotate(-8deg);
+  font-size:12.5px;
+  letter-spacing:2px;
+  border-radius:3px;
+}
+.stamp::after{
+  content:"";
+  position:absolute; inset:-4px;
+  border:1px solid var(--rust);
+  border-radius:5px;
+}
+.meta-row{
+  display:flex; gap:22px; flex-wrap:wrap;
+  margin-top:16px;
+  font-family:var(--display);
+  font-size:10.5px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+.meta-row b{ color:var(--ink); }
+
+.preamble{
+  margin-top:18px;
+  border-left:3px solid var(--rust);
+  padding:8px 0 8px 14px;
+  font-family:var(--hand);
+  font-size:13px;
+  line-height:1.55;
+  color:#433e31;
+}
+
+/* ================= INDEX ================= */
+.index{
+  padding:22px 44px 26px;
+  border-bottom:1px solid rgba(42,39,31,0.3);
+  background:rgba(0,0,0,0.03);
+}
+.index h2{
+  font-family:var(--display);
+  font-size:14px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin:0 0 12px;
+  color:var(--rust);
+}
+.index ol{
+  margin:0; padding:0; list-style:none;
+  columns:2; column-gap:34px;
+}
+.index li{
+  font-size:12.5px;
+  padding:3px 0;
+  border-bottom:1px dotted rgba(42,39,31,0.28);
+  break-inside:avoid;
+}
+.index li span{
+  font-family:var(--display);
+  font-weight:600;
+  color:var(--rust);
+  margin-right:8px;
+}
+
+/* ================= SECTIONS ================= */
+.section{
+  padding:18px 42px;
+  border-bottom:1px solid rgba(42,39,31,0.25);
+}
+.section:nth-of-type(even){ background:rgba(0,0,0,0.022); }
+
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:6px;
+}
+.sec-num{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:27px;
+  color:var(--rust);
+  min-width:44px;
+}
+.sec-title{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:19px;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  border-bottom:2px solid var(--ink);
+  padding-bottom:4px;
+  flex:1;
+}
+.tagline{
+  font-family:var(--hand);
+  font-size:12.5px;
+  color:var(--faint);
+  margin:0 0 12px 58px;
+}
+.sec-body{ margin-left:58px; }
+@media print{ .sec-body,.tagline{ margin-left:58px; } }
+
+.sec-body p{ line-height:1.6; font-size:14px; margin:0 0 9px; }
+.sec-body ul{ margin:8px 0 10px; padding:0; list-style:none; }
+.sec-body li{
+  line-height:1.55;
+  font-size:14px;
+  padding-left:20px;
+  position:relative;
+  margin-bottom:6px;
+}
+.sec-body li::before{
+  content:"▸";
+  position:absolute; left:0; top:0;
+  color:var(--rust);
+  font-weight:bold;
+}
+.sec-body b{ color:var(--rust); font-weight:600; }
+.lbl{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin:14px 0 6px;
+}
+
+/* ================= ENCARTS ================= */
+.callout{
+  border:2px solid var(--ink);
+  background:var(--paper-dark);
+  padding:12px 16px;
+  margin:12px 0 4px;
+}
+.callout.danger{ border-color:var(--rust); }
+.callout.warn{ border-color:var(--ocre); }
+.callout-label{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:10.5px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:5px;
+}
+.callout.danger .callout-label{ color:var(--rust); }
+.callout.warn .callout-label{ color:#8a6a12; }
+.callout p{ margin:0; font-size:13px; line-height:1.55; }
+
+/* ================= CARTES ================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin:10px 0 4px;
+}
+.card{
+  border:1.5px solid var(--ink);
+  padding:10px 13px;
+  background:rgba(255,255,255,0.18);
+}
+.card h4{
+  font-family:var(--display);
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin:0 0 5px;
+  color:var(--olive);
+}
+.card p{ font-size:12.5px; margin:0; line-height:1.5; }
+
+/* ================= FIGURES ================= */
+.figure{
+  margin:14px 0 4px;
+  border-top:1px solid rgba(42,39,31,0.35);
+  border-bottom:1px solid rgba(42,39,31,0.35);
+  padding:12px 0 10px;
+}
+.fig-title{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:11px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  color:var(--rust);
+  margin-bottom:8px;
+}
+.figure svg{ width:97%; height:auto; display:block; margin:0 auto; }
+.fig-legend{
+  margin-top:9px;
+  font-size:11.5px;
+  line-height:1.5;
+  color:#413c30;
+}
+.fig-legend ol{
+  margin:0; padding:0; list-style:none;
+  columns:2; column-gap:26px;
+}
+.fig-legend li{ padding:1px 0; break-inside:avoid; }
+.fig-legend li b{
+  font-family:var(--display);
+  color:var(--rust);
+  margin-right:5px;
+}
+.fig-note{
+  margin-top:6px;
+  font-family:var(--hand);
+  font-size:11px;
+  color:var(--faint);
+}
+
+/* ================= FOOTER ================= */
+.torn{
+  height:12px;
+  background:var(--ink);
+  clip-path:polygon(0% 0%,3% 100%,6% 10%,9% 90%,12% 5%,15% 100%,18% 0%,21% 95%,24% 15%,27% 100%,30% 5%,33% 90%,36% 10%,39% 100%,42% 0%,45% 90%,48% 10%,51% 100%,54% 5%,57% 95%,60% 15%,63% 100%,66% 0%,69% 90%,72% 10%,75% 100%,78% 5%,81% 95%,84% 15%,87% 100%,90% 0%,93% 90%,96% 10%,100% 100%,100% 0%,0% 0%);
+}
+.footer{
+  padding:20px 44px 30px;
+  font-family:var(--hand);
+  font-size:11.5px;
+  color:var(--faint);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+}
+.footer .sig{
+  border-top:1px solid var(--ink);
+  padding-top:5px;
+  min-width:210px;
+  text-align:center;
+  font-family:var(--display);
+  font-size:9.5px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+@media print{
+  .doc{ border:none; max-width:none; }
+  .header{ padding-top:6px; }
+  .section{ padding-left:34px; padding-right:34px; }
+  .header,.index,.footer{ padding-left:34px; padding-right:34px; }
+}
+
+@media (max-width:640px){
+  .header,.index,.section,.footer{ padding-left:20px; padding-right:20px; }
+  h1{ font-size:28px; }
+  .grid,.index ol,.fig-legend ol{ grid-template-columns:1fr; columns:1; }
+  .sec-body,.tagline{ margin-left:0; }
+  .stamp{ position:static; display:inline-block; margin-top:12px; transform:rotate(-3deg); }
+}
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ============ EN-TÊTE ============ -->
+<div class="header">
+  <div class="eyebrow">Comté de Knox — zone de quarantaine</div>
+  <h1>Manuel de survie<br>en territoire infesté</h1>
+  <div class="subtitle">Document de terrain — à conserver sur soi en permanence</div>
+  <div class="stamp">Priorité vitale</div>
+  <div class="meta-row">
+    <span><b>Réf.</b> KX-42.20</span>
+    <span><b>Statut</b> vérifié sur le terrain</span>
+    <span><b>Portée</b> individuel &amp; groupe</span>
+    <span><b>Articles</b> 15 — <b>Planches</b> 9</span>
+  </div>
+  <div class="preamble">
+    Si tu lis ces lignes, tu as passé la première semaine. Les articles sont classés
+    du plus vital au moins critique : lis-les dans l'ordre au moins une fois, puis
+    consulte par article. Transmets ce document à tout nouveau membre du groupe.
+  </div>
+</div>
+
+<!-- ============ INDEX ============ -->
+<div class="index">
+  <h2>Index des articles</h2>
+  <ol>
+    <li><span>01</span>Le bruit te trahit</li>
+    <li><span>02</span>Santé &amp; système médical</li>
+    <li><span>03</span>Fatigue &amp; sommeil</li>
+    <li><span>04</span>Choisir &amp; sécuriser sa base</li>
+    <li><span>05</span>Eau, nourriture &amp; élevage</li>
+    <li><span>06</span>Combat &amp; tactique</li>
+    <li><span>07</span>Météo &amp; saisons</li>
+    <li><span>08</span>Gestion de l'inventaire</li>
+    <li><span>09</span>Véhicules</li>
+    <li><span>10</span>Compétences &amp; traits</li>
+    <li><span>11</span>Artisanat &amp; autosuffisance</li>
+    <li><span>12</span>Gestion des cadavres</li>
+    <li><span>13</span>Difficulté croissante</li>
+    <li><span>14</span>Spécificités multijoueur</li>
+    <li><span>15</span>Erreurs qui coûtent cher</li>
+  </ol>
+</div>
+
+<!-- ============ 01 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">01</div><div class="sec-title">Le bruit te trahit</div></div>
+  <div class="tagline">Ils ont de bonnes oreilles. Le silence est ta meilleure armure.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Ne cours jamais sans raison en zone urbaine</li>
+      <li>Referme systématiquement chaque porte derrière toi, même en fuite</li>
+      <li>Coup de feu = horde ramenée depuis plusieurs rues → dernier recours, issue de secours repérée à l'avance</li>
+      <li>Moteur de véhicule = rayon sonore encore plus large → ne jamais se garer devant la base</li>
+    </ul>
+    <div class="callout danger">
+      <div class="callout-label">⚠ Règle d'or</div>
+      <p>Un coup de feu ou une course en ville sans plan reste le moyen le plus fiable de mourir. Tout le reste du manuel découle de ce principe.</p>
+    </div>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 1 — Rayons sonores comparés</div>
+      <svg viewBox="0 0 760 400" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="#2a271f" stroke-opacity="0.13" stroke-width="1">
+          <line x1="0" y1="70" x2="470" y2="70"/>
+          <line x1="0" y1="330" x2="470" y2="330"/>
+          <line x1="120" y1="0" x2="120" y2="400"/>
+          <line x1="420" y1="0" x2="420" y2="400"/>
+        </g>
+        <circle cx="270" cy="200" r="185" fill="none" stroke="#8a3324" stroke-width="3.4"/>
+        <circle cx="270" cy="200" r="140" fill="none" stroke="#8a3324" stroke-width="2.6" stroke-opacity="0.8"/>
+        <circle cx="270" cy="200" r="100" fill="none" stroke="#2a271f" stroke-width="2" stroke-dasharray="7 4"/>
+        <circle cx="270" cy="200" r="70"  fill="none" stroke="#2a271f" stroke-width="1.6"/>
+        <circle cx="270" cy="200" r="45"  fill="none" stroke="#4d5a3a" stroke-width="1.4"/>
+        <circle cx="270" cy="200" r="25"  fill="none" stroke="#4d5a3a" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <!-- silhouette -->
+        <circle cx="270" cy="188" r="5.5" fill="#2a271f"/>
+        <path d="M270 194 L270 210 M262 200 L278 200 M270 210 L263 222 M270 210 L277 222"
+              stroke="#2a271f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <!-- repères -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="11" font-weight="600">
+          <circle cx="282" cy="178" r="9" fill="#4d5a3a"/><text x="282" y="182" fill="#e7dfc6" text-anchor="middle">1</text>
+          <circle cx="292" cy="161" r="9" fill="#4d5a3a"/><text x="292" y="165" fill="#e7dfc6" text-anchor="middle">2</text>
+          <circle cx="305" cy="139" r="9" fill="#2a271f"/><text x="305" y="143" fill="#e7dfc6" text-anchor="middle">3</text>
+          <circle cx="320" cy="113" r="9" fill="#2a271f"/><text x="320" y="117" fill="#e7dfc6" text-anchor="middle">4</text>
+          <circle cx="340" cy="79"  r="9" fill="#8a3324"/><text x="340" y="83" fill="#e7dfc6" text-anchor="middle">5</text>
+          <circle cx="362" cy="40"  r="9" fill="#8a3324"/><text x="362" y="44" fill="#e7dfc6" text-anchor="middle">6</text>
+        </g>
+        <!-- légende latérale -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="12.5" fill="#2a271f">
+          <text x="500" y="96"  font-weight="600">1 — Déplacement accroupi</text>
+          <text x="500" y="126" font-weight="600">2 — Marche normale</text>
+          <text x="500" y="156" font-weight="600">3 — Course</text>
+          <text x="500" y="186" font-weight="600">4 — Porte claquée / vitre</text>
+          <text x="500" y="216" font-weight="600" fill="#8a3324">5 — Moteur de véhicule</text>
+          <text x="500" y="246" font-weight="600" fill="#8a3324">6 — Coup de feu</text>
+          <line x1="500" y1="266" x2="740" y2="266" stroke="#2a271f" stroke-opacity="0.35"/>
+          <text x="500" y="290" font-size="11" fill="#5a5442">Zone hachurée = distance depuis</text>
+          <text x="500" y="308" font-size="11" fill="#5a5442">laquelle un mort-vivant converge</text>
+          <text x="500" y="326" font-size="11" fill="#5a5442">vers la source du bruit.</text>
+        </g>
+      </svg>
+      <div class="fig-note">Schéma indicatif — rayons strictement relatifs entre eux, aucune valeur de distance en jeu.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 02 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">02</div><div class="sec-title">Santé &amp; système médical</div></div>
+  <div class="tagline">Ton corps est ton dernier outil.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Toute blessure non traitée s'aggrave : infection, boiterie, fièvre</li>
+      <li>Garde toujours sur toi : bandages, désinfectant, antidouleurs</li>
+      <li><b>Morsure de zombie</b> = presque toujours fatale à terme</li>
+      <li><b>Griffure ou coup normal</b> = ne contamine pas, mais s'infecte si non désinfecté</li>
+      <li>Vérifie ton corps après chaque affrontement, sans exception</li>
+      <li>Fracture → attelle ou plâtre + repos strict, aucun effort intense pendant la convalescence</li>
+      <li>Surveille aussi le moral : peur, solitude et désespoir altèrent le jugement</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 2 — Conduite à tenir après un affrontement</div>
+      <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 z" fill="#2a271f"/>
+          </marker>
+        </defs>
+        <g font-family="'IBM Plex Mono',monospace" font-size="12.5" text-anchor="middle">
+          <!-- entrée -->
+          <rect x="240" y="8" width="240" height="42" fill="#d9cea8" stroke="#2a271f" stroke-width="2"/>
+          <text x="360" y="34" font-weight="600">EXAMEN DU CORPS</text>
+
+          <path d="M360 50 L360 78 M120 78 L600 78 M120 78 L120 100 M360 78 L360 100 M600 78 L600 100"
+                stroke="#2a271f" stroke-width="1.8" fill="none"/>
+
+          <!-- branches -->
+          <rect x="30" y="100" width="180" height="40" fill="#e7dfc6" stroke="#8a3324" stroke-width="2.4"/>
+          <text x="120" y="125" font-weight="600" fill="#8a3324">MORSURE</text>
+
+          <rect x="270" y="100" width="180" height="40" fill="#e7dfc6" stroke="#2a271f" stroke-width="1.8"/>
+          <text x="360" y="125" font-weight="600">GRIFFURE / COUP</text>
+
+          <rect x="510" y="100" width="180" height="40" fill="#e7dfc6" stroke="#2a271f" stroke-width="1.8"/>
+          <text x="600" y="125" font-weight="600">TRAUMATISME</text>
+
+          <line x1="120" y1="140" x2="120" y2="176" stroke="#8a3324" stroke-width="2.4" marker-end="url(#a2)"/>
+          <line x1="360" y1="140" x2="360" y2="176" stroke="#2a271f" stroke-width="1.8" marker-end="url(#a2)"/>
+          <line x1="600" y1="140" x2="600" y2="176" stroke="#2a271f" stroke-width="1.8" marker-end="url(#a2)"/>
+
+          <!-- actions -->
+          <rect x="30" y="182" width="180" height="72" fill="#d9cea8" stroke="#8a3324" stroke-width="2.4"/>
+          <text x="120" y="205" font-size="11.5">Bander, désinfecter,</text>
+          <text x="120" y="222" font-size="11.5">isoler la tâche critique</text>
+          <text x="120" y="243" font-size="11.5" font-weight="600" fill="#8a3324">prévenir le groupe</text>
+
+          <rect x="270" y="182" width="180" height="72" fill="#e7dfc6" stroke="#2a271f" stroke-width="1.6"/>
+          <text x="360" y="205" font-size="11.5">Nettoyer, désinfecter,</text>
+          <text x="360" y="222" font-size="11.5">bander proprement</text>
+          <text x="360" y="243" font-size="11.5" font-weight="600">surveiller la fièvre</text>
+
+          <rect x="510" y="182" width="180" height="72" fill="#e7dfc6" stroke="#2a271f" stroke-width="1.6"/>
+          <text x="600" y="205" font-size="11.5">Attelle ou plâtre,</text>
+          <text x="600" y="222" font-size="11.5">immobiliser</text>
+          <text x="600" y="243" font-size="11.5" font-weight="600">repos strict</text>
+
+          <line x1="120" y1="254" x2="120" y2="290" stroke="#8a3324" stroke-width="2.4" marker-end="url(#a2)"/>
+          <line x1="360" y1="254" x2="360" y2="290" stroke="#2a271f" stroke-width="1.8" marker-end="url(#a2)"/>
+          <line x1="600" y1="254" x2="600" y2="290" stroke="#2a271f" stroke-width="1.8" marker-end="url(#a2)"/>
+
+          <!-- issues -->
+          <rect x="30" y="296" width="180" height="56" fill="#8a3324"/>
+          <text x="120" y="320" font-size="11.5" font-weight="600" fill="#e7dfc6">ISSUE PRESQUE</text>
+          <text x="120" y="338" font-size="11.5" font-weight="600" fill="#e7dfc6">TOUJOURS FATALE</text>
+
+          <rect x="270" y="296" width="180" height="56" fill="#e7dfc6" stroke="#4d5a3a" stroke-width="2"/>
+          <text x="360" y="320" font-size="11.5">Récupération si soins</text>
+          <text x="360" y="338" font-size="11.5">tenus dans la durée</text>
+
+          <rect x="510" y="296" width="180" height="56" fill="#e7dfc6" stroke="#4d5a3a" stroke-width="2"/>
+          <text x="600" y="320" font-size="11.5">Récupération lente,</text>
+          <text x="600" y="338" font-size="11.5">effort intense proscrit</text>
+
+          <text x="360" y="382" font-size="11.5" fill="#5a5442">Toute blessure ignorée bascule vers infection, boiterie ou fièvre.</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 03 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">03</div><div class="sec-title">Fatigue &amp; sommeil</div></div>
+  <div class="tagline">Un corps épuisé est un corps mort.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Ne jamais dormir dehors ou dans un lieu non sécurisé</li>
+      <li>Barricade avant de fermer les yeux</li>
+      <li>Faim, soif et moral bas amplifient chaque effet de la fatigue</li>
+      <li>Un perso non reposé perd endurance, précision et jugement — et peut s'endormir de force au pire moment</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 04 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">04</div><div class="sec-title">Choisir &amp; sécuriser sa base</div></div>
+  <div class="tagline">Une base mal choisie est un piège qu'on se pose à soi-même.</div>
+  <div class="sec-body">
+    <div class="lbl">Critères d'un bon abri</div>
+    <div class="grid">
+      <div class="card"><h4>Accès unique</h4><p>Un seul point d'entrée à surveiller vaut mieux que quatre portes ouvertes.</p></div>
+      <div class="card"><h4>Hauteur</h4><p>Étage ou toit accessible : observation, fuite, position défensive.</p></div>
+      <div class="card"><h4>Ressources proches</h4><p>Eau et terrain cultivable à distance de marche raisonnable.</p></div>
+      <div class="card"><h4>Sous-sol</h4><p>Stockage discret, refuge, parfois butin rare. Avantage net.</p></div>
+    </div>
+    <div class="lbl">Sécurisation</div>
+    <ul>
+      <li>Barricade les fenêtres du rez-de-chaussée en priorité</li>
+      <li>Bloque ou détruis les accès extérieurs superflus</li>
+      <li>Verrouille systématiquement, chaque nuit</li>
+      <li>Clôture périphérique = protège camp, cultures et bêtes d'un seul geste</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 3 — Plan type d'une base défendable</div>
+      <svg viewBox="0 0 760 470" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="#2a271f" stroke-width="1.6" stroke-opacity="0.5"/>
+          </pattern>
+          <pattern id="crop" width="9" height="9" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="9" y2="0" stroke="#4d5a3a" stroke-width="1.4" stroke-opacity="0.65"/>
+          </pattern>
+          <marker id="a3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 z" fill="#8a3324"/>
+          </marker>
+        </defs>
+
+        <!-- clôture -->
+        <rect x="24" y="26" width="560" height="410" fill="none" stroke="#2a271f"
+              stroke-width="2.2" stroke-dasharray="10 6"/>
+        <text x="34" y="20" font-family="'IBM Plex Mono',monospace" font-size="11" fill="#5a5442">clôture périphérique</text>
+
+        <!-- maison -->
+        <rect x="70" y="90" width="250" height="230" fill="#d9cea8" stroke="#2a271f" stroke-width="2.6"/>
+        <line x1="70" y1="210" x2="320" y2="210" stroke="#2a271f" stroke-width="1.4" stroke-opacity="0.6"/>
+        <line x1="200" y1="90" x2="200" y2="210" stroke="#2a271f" stroke-width="1.4" stroke-opacity="0.6"/>
+
+        <!-- fenêtres barricadées (hachures) -->
+        <rect x="70" y="140" width="9" height="46" fill="url(#hatch)" stroke="#2a271f" stroke-width="1.4"/>
+        <rect x="311" y="140" width="9" height="46" fill="url(#hatch)" stroke="#2a271f" stroke-width="1.4"/>
+        <rect x="120" y="311" width="50" height="9" fill="url(#hatch)" stroke="#2a271f" stroke-width="1.4"/>
+        <rect x="230" y="311" width="50" height="9" fill="url(#hatch)" stroke="#2a271f" stroke-width="1.4"/>
+
+        <!-- porte unique -->
+        <rect x="185" y="86" width="46" height="8" fill="#8a3324"/>
+        <path d="M208 86 L208 62" stroke="#8a3324" stroke-width="2.2" marker-end="url(#a3)"/>
+
+        <!-- stockage réparti -->
+        <rect x="86" y="106" width="34" height="26" fill="none" stroke="#2a271f" stroke-width="1.8"/>
+        <rect x="270" y="270" width="34" height="26" fill="none" stroke="#2a271f" stroke-width="1.8"/>
+
+        <!-- observation étage -->
+        <circle cx="285" cy="120" r="15" fill="none" stroke="#4d5a3a" stroke-width="2"/>
+        <path d="M285 105 L285 135 M270 120 L300 120" stroke="#4d5a3a" stroke-width="1.6"/>
+
+        <!-- potager -->
+        <rect x="370" y="100" width="180" height="130" fill="url(#crop)" stroke="#4d5a3a" stroke-width="2"/>
+        <!-- enclos -->
+        <rect x="370" y="260" width="180" height="150" fill="none" stroke="#2a271f" stroke-width="2" stroke-dasharray="5 4"/>
+        <circle cx="410" cy="310" r="8" fill="none" stroke="#2a271f" stroke-width="1.5"/>
+        <circle cx="450" cy="350" r="8" fill="none" stroke="#2a271f" stroke-width="1.5"/>
+        <circle cx="505" cy="300" r="8" fill="none" stroke="#2a271f" stroke-width="1.5"/>
+
+        <!-- collecte eau -->
+        <circle cx="345" cy="70" r="13" fill="#d9cea8" stroke="#2a271f" stroke-width="2"/>
+        <circle cx="378" cy="70" r="13" fill="#d9cea8" stroke="#2a271f" stroke-width="2"/>
+
+        <!-- véhicule éloigné -->
+        <rect x="640" y="360" width="90" height="46" fill="#d9cea8" stroke="#2a271f" stroke-width="2"/>
+        <circle cx="660" cy="410" r="7" fill="#2a271f"/><circle cx="712" cy="410" r="7" fill="#2a271f"/>
+        <path d="M584 383 L636 383" stroke="#8a3324" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a3)"/>
+        <text x="596" y="374" font-family="'IBM Plex Mono',monospace" font-size="10.5" fill="#8a3324">distance</text>
+
+        <!-- numéros -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="700" text-anchor="middle">
+          <circle cx="208" cy="52" r="12" fill="#8a3324"/><text x="208" y="56" fill="#e7dfc6">1</text>
+          <circle cx="52"  cy="163" r="12" fill="#2a271f"/><text x="52" y="167" fill="#e7dfc6">2</text>
+          <circle cx="285" cy="120" r="0"/>
+          <circle cx="322" cy="120" r="12" fill="#4d5a3a"/><text x="322" y="124" fill="#e7dfc6">3</text>
+          <circle cx="103" cy="119" r="12" fill="#2a271f"/><text x="103" y="123" fill="#e7dfc6">4</text>
+          <circle cx="460" cy="165" r="12" fill="#4d5a3a"/><text x="460" y="169" fill="#e7dfc6">5</text>
+          <circle cx="460" cy="390" r="12" fill="#2a271f"/><text x="460" y="394" fill="#e7dfc6">6</text>
+          <circle cx="362" cy="40" r="12" fill="#2a271f"/><text x="362" y="44" fill="#e7dfc6">7</text>
+          <circle cx="685" cy="330" r="12" fill="#8a3324"/><text x="685" y="334" fill="#e7dfc6">8</text>
+        </g>
+      </svg>
+      <div class="fig-legend">
+        <ol>
+          <li><b>1</b>Accès unique contrôlé et verrouillé</li>
+          <li><b>2</b>Fenêtres du rez-de-chaussée barricadées</li>
+          <li><b>3</b>Point d'observation à l'étage</li>
+          <li><b>4</b>Stockage réparti en deux points distincts</li>
+          <li><b>5</b>Potager à l'intérieur de la clôture</li>
+          <li><b>6</b>Enclos animaux, clôture solide</li>
+          <li><b>7</b>Collecte d'eau de pluie</li>
+          <li><b>8</b>Stationnement à distance du bâtiment</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 05 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">05</div><div class="sec-title">Eau, nourriture &amp; élevage</div></div>
+  <div class="tagline">L'eau, la terre, les bêtes. Rien d'autre ne durera.</div>
+  <div class="sec-body">
+    <ul>
+      <li><b>Eau</b> — bacs et fûts pour la pluie ; faire bouillir toute eau douteuse</li>
+      <li><b>Culture</b> — potager tôt, graines en jardinerie / supermarché / jardins abandonnés, respecter les saisons, désherber régulièrement</li>
+      <li><b>Élevage</b> — poules (œufs, entretien simple) ; vaches et moutons (lait, viande, cuir, mais enclos solide et ravitaillement constant)</li>
+      <li><b>Conservation</b> — séchoir, mise en conserve, fumage : indispensable une fois l'électricité coupée pour de bon</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 4 — Boucle d'autosuffisance alimentaire</div>
+      <svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a4" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#4d5a3a"/>
+          </marker>
+        </defs>
+        <circle cx="360" cy="200" r="140" fill="none" stroke="#4d5a3a" stroke-width="2" stroke-dasharray="8 6" stroke-opacity="0.7"/>
+        <!-- flèches sur le cercle -->
+        <g stroke="#4d5a3a" stroke-width="2.4" fill="none" marker-end="url(#a4)">
+          <path d="M455 108 A140 140 0 0 1 487 176"/>
+          <path d="M487 224 A140 140 0 0 1 455 292"/>
+          <path d="M400 336 A140 140 0 0 1 320 336"/>
+          <path d="M265 292 A140 140 0 0 1 233 224"/>
+          <path d="M233 176 A140 140 0 0 1 265 108"/>
+          <path d="M320 64 A140 140 0 0 1 400 64"/>
+        </g>
+        <g font-family="'IBM Plex Mono',monospace" font-size="11.5" text-anchor="middle">
+          <rect x="285" y="38" width="150" height="44" fill="#e7dfc6" stroke="#2a271f" stroke-width="2"/>
+          <text x="360" y="58" font-weight="600">PLUIE &amp;</text><text x="360" y="73">POINT D'EAU</text>
+
+          <rect x="406" y="108" width="150" height="44" fill="#e7dfc6" stroke="#2a271f" stroke-width="2"/>
+          <text x="481" y="128" font-weight="600">POTAGER</text><text x="481" y="143">&amp; BÉTAIL</text>
+
+          <rect x="406" y="248" width="150" height="44" fill="#e7dfc6" stroke="#2a271f" stroke-width="2"/>
+          <text x="481" y="268" font-weight="600">RÉCOLTE,</text><text x="481" y="283">ŒUFS, VIANDE</text>
+
+          <rect x="285" y="318" width="150" height="44" fill="#d9cea8" stroke="#8a3324" stroke-width="2.4"/>
+          <text x="360" y="338" font-weight="600" fill="#8a3324">CONSERVATION</text>
+          <text x="360" y="353" font-size="10.5">séchoir · conserve · fumage</text>
+
+          <rect x="164" y="248" width="150" height="44" fill="#e7dfc6" stroke="#2a271f" stroke-width="2"/>
+          <text x="239" y="268" font-weight="600">STOCK</text><text x="239" y="283" font-size="10.5">réparti, jamais unique</text>
+
+          <rect x="164" y="108" width="150" height="44" fill="#e7dfc6" stroke="#2a271f" stroke-width="2"/>
+          <text x="239" y="128" font-weight="600">CONSOMMATION</text><text x="239" y="143" font-size="10.5">&amp; déchets → compost</text>
+
+          <text x="360" y="196" font-family="'IBM Plex Mono',monospace" font-size="12" font-weight="600" fill="#4d5a3a">BOUCLE FERMÉE</text>
+          <text x="360" y="214" font-size="10.5" fill="#5a5442">aucune dépendance</text>
+          <text x="360" y="229" font-size="10.5" fill="#5a5442">au pillage</text>
+        </g>
+      </svg>
+      <div class="fig-note">Le maillon « conservation » est le point de rupture le plus fréquent : sans lui, la récolte se perd avant d'être consommée.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 06 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">06</div><div class="sec-title">Combat &amp; tactique</div></div>
+  <div class="tagline">Un mort-vivant se gère. Une horde se fuit.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Ne jamais se faire encercler → reculer vers un couloir ou une porte pour ne gérer qu'un ou deux assaillants à la fois</li>
+      <li>Viser la tête une fois compétence et endurance suffisantes</li>
+      <li>Surveiller l'endurance en permanence — attrapé à bout de souffle = contamination facile</li>
+      <li>Armes à feu = urgence uniquement, jamais premier réflexe</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 5 — Encerclement contre goulot d'étranglement</div>
+      <svg viewBox="0 0 740 320" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="'IBM Plex Mono',monospace">
+          <!-- panneau gauche -->
+          <rect x="20" y="40" width="320" height="240" fill="#e7dfc6" stroke="#8a3324" stroke-width="2.6"/>
+          <text x="20" y="30" font-size="12.5" font-weight="700" fill="#8a3324">À ÉVITER — ESPACE OUVERT</text>
+          <circle cx="180" cy="158" r="7" fill="#2a271f"/>
+          <path d="M180 165 L180 182 M170 172 L190 172 M180 182 L172 196 M180 182 L188 196"
+                stroke="#2a271f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <g fill="none" stroke="#8a3324" stroke-width="2">
+            <circle cx="90"  cy="90"  r="11"/><circle cx="180" cy="72"  r="11"/>
+            <circle cx="272" cy="96"  r="11"/><circle cx="292" cy="176" r="11"/>
+            <circle cx="248" cy="242" r="11"/><circle cx="146" cy="252" r="11"/>
+            <circle cx="70"  cy="196" r="11"/>
+          </g>
+          <g stroke="#8a3324" stroke-width="1.4" stroke-dasharray="4 3">
+            <line x1="101" y1="101" x2="163" y2="146"/><line x1="180" y1="83" x2="180" y2="140"/>
+            <line x1="261" y1="107" x2="197" y2="146"/><line x1="281" y1="176" x2="200" y2="170"/>
+            <line x1="240" y1="232" x2="192" y2="192"/><line x1="153" y1="242" x2="176" y2="200"/>
+            <line x1="81"  y1="190" x2="164" y2="172"/>
+          </g>
+          <text x="180" y="272" font-size="11.5" text-anchor="middle" fill="#8a3324">contacts simultanés sur 360°</text>
+
+          <!-- panneau droit -->
+          <rect x="400" y="40" width="320" height="240" fill="#e7dfc6" stroke="#4d5a3a" stroke-width="2.6"/>
+          <text x="400" y="30" font-size="12.5" font-weight="700" fill="#4d5a3a">CORRECT — GOULOT D'ÉTRANGLEMENT</text>
+          <!-- murs -->
+          <rect x="400" y="40" width="150" height="86" fill="#d9cea8" stroke="#2a271f" stroke-width="2"/>
+          <rect x="400" y="194" width="150" height="86" fill="#d9cea8" stroke="#2a271f" stroke-width="2"/>
+          <line x1="550" y1="40" x2="550" y2="126" stroke="#2a271f" stroke-width="3"/>
+          <line x1="550" y1="194" x2="550" y2="280" stroke="#2a271f" stroke-width="3"/>
+          <!-- survivant dans le couloir -->
+          <circle cx="640" cy="152" r="7" fill="#2a271f"/>
+          <path d="M640 159 L640 176 M630 166 L650 166 M640 176 L632 190 M640 176 L648 190"
+                stroke="#2a271f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <!-- zombies canalisés -->
+          <g fill="none" stroke="#4d5a3a" stroke-width="2">
+            <circle cx="520" cy="160" r="11"/><circle cx="470" cy="160" r="11"/>
+          </g>
+          <g fill="none" stroke="#8a3324" stroke-width="2" stroke-opacity="0.45">
+            <circle cx="430" cy="86" r="11"/><circle cx="430" cy="236" r="11"/><circle cx="418" cy="160" r="11"/>
+          </g>
+          <line x1="531" y1="160" x2="612" y2="158" stroke="#4d5a3a" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <text x="560" y="272" font-size="11.5" text-anchor="middle" fill="#4d5a3a">un ou deux contacts à la fois</text>
+          <text x="464" y="120" font-size="10.5" fill="#8a3324">bloqués</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 07 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">07</div><div class="sec-title">Météo &amp; saisons</div></div>
+  <div class="tagline">Le froid ne fait pas de bruit, mais il tue aussi sûrement.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Exposition prolongée au froid sans vêtements adaptés → hypothermie</li>
+      <li>Stocker vêtements chauds et imperméables <b>avant</b> l'urgence</li>
+      <li>Jours plus courts en hiver → moins de temps d'action utile par journée</li>
+      <li>Cultures limitées à certaines périodes → constituer les réserves avant la morte-saison</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 6 — Pression saisonnière sur la survie</div>
+      <svg viewBox="0 0 740 250" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="'IBM Plex Mono',monospace" font-size="11.5">
+          <line x1="150" y1="30" x2="150" y2="210" stroke="#2a271f" stroke-width="1.6"/>
+          <text x="140" y="76"  text-anchor="end" font-weight="600">Cultures</text>
+          <text x="140" y="136" text-anchor="end" font-weight="600">Jours utiles</text>
+          <text x="140" y="196" text-anchor="end" font-weight="600" fill="#8a3324">Risque froid</text>
+
+          <g text-anchor="middle" font-weight="700" font-size="12">
+            <text x="220" y="24">PRINTEMPS</text><text x="360" y="24">ÉTÉ</text>
+            <text x="500" y="24">AUTOMNE</text><text x="640" y="24">HIVER</text>
+          </g>
+          <g stroke="#2a271f" stroke-opacity="0.18" stroke-width="1">
+            <line x1="290" y1="30" x2="290" y2="210"/><line x1="430" y1="30" x2="430" y2="210"/>
+            <line x1="570" y1="30" x2="570" y2="210"/>
+          </g>
+
+          <!-- cultures -->
+          <rect x="155" y="58" width="130" height="24" fill="#4d5a3a" fill-opacity="0.75"/>
+          <rect x="295" y="58" width="130" height="24" fill="#4d5a3a" fill-opacity="0.9"/>
+          <rect x="435" y="58" width="130" height="24" fill="#4d5a3a" fill-opacity="0.5"/>
+          <rect x="575" y="58" width="130" height="24" fill="none" stroke="#4d5a3a" stroke-width="1.6" stroke-dasharray="5 4"/>
+          <text x="640" y="75" text-anchor="middle" font-size="10.5" fill="#4d5a3a">quasi nul</text>
+
+          <!-- jours utiles -->
+          <rect x="155" y="118" width="130" height="24" fill="#2a271f" fill-opacity="0.6"/>
+          <rect x="295" y="118" width="130" height="24" fill="#2a271f" fill-opacity="0.8"/>
+          <rect x="435" y="118" width="130" height="24" fill="#2a271f" fill-opacity="0.45"/>
+          <rect x="575" y="118" width="130" height="24" fill="#2a271f" fill-opacity="0.25"/>
+          <text x="640" y="135" text-anchor="middle" font-size="10.5" fill="#2a271f">journées courtes</text>
+
+          <!-- risque froid -->
+          <rect x="155" y="178" width="130" height="24" fill="none" stroke="#8a3324" stroke-width="1.6"/>
+          <rect x="295" y="178" width="130" height="24" fill="none" stroke="#8a3324" stroke-width="1.6" stroke-dasharray="4 4"/>
+          <rect x="435" y="178" width="130" height="24" fill="#8a3324" fill-opacity="0.45"/>
+          <rect x="575" y="178" width="130" height="24" fill="#8a3324" fill-opacity="0.85"/>
+          <text x="640" y="195" text-anchor="middle" font-size="10.5" fill="#e7dfc6" font-weight="600">hypothermie</text>
+
+          <text x="150" y="236" font-size="11" fill="#5a5442">Préparer vêtements chauds et réserves alimentaires pendant les périodes favorables.</text>
+        </g>
+      </svg>
+      <div class="fig-note">Schéma indicatif — intensités relatives, sans valeur chiffrée de jeu.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 08 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">08</div><div class="sec-title">Gestion de l'inventaire</div></div>
+  <div class="tagline">Le poids d'un sac fait la différence entre fuir et mourir.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Priorité de chargement : <b>arme → eau → nourriture → matériel médical</b> → le reste en second voyage</li>
+      <li>La surcharge coûte de l'endurance et de la vitesse</li>
+      <li>Un perso surchargé rattrapé par une horde = mort quasi certaine</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 7 — Ordre de chargement en zone hostile</div>
+      <svg viewBox="0 0 740 190" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a7" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 z" fill="#2a271f"/>
+          </marker>
+        </defs>
+        <g font-family="'IBM Plex Mono',monospace" font-size="12" text-anchor="middle">
+          <rect x="14"  y="46" width="140" height="56" fill="#8a3324"/>
+          <text x="84" y="70" fill="#e7dfc6" font-weight="700">1 · ARME</text>
+          <text x="84" y="88" fill="#e7dfc6" font-size="10.5">mêlée fiable</text>
+
+          <rect x="176" y="46" width="140" height="56" fill="#2a271f"/>
+          <text x="246" y="70" fill="#e7dfc6" font-weight="700">2 · EAU</text>
+          <text x="246" y="88" fill="#e7dfc6" font-size="10.5">gourde pleine</text>
+
+          <rect x="338" y="46" width="140" height="56" fill="#4d5a3a"/>
+          <text x="408" y="70" fill="#e7dfc6" font-weight="700">3 · NOURRITURE</text>
+          <text x="408" y="88" fill="#e7dfc6" font-size="10.5">compacte</text>
+
+          <rect x="500" y="46" width="140" height="56" fill="#d9cea8" stroke="#2a271f" stroke-width="2"/>
+          <text x="570" y="70" font-weight="700">4 · MÉDICAL</text>
+          <text x="570" y="88" font-size="10.5">bandages, désinf.</text>
+
+          <line x1="156" y1="74" x2="172" y2="74" stroke="#2a271f" stroke-width="2" marker-end="url(#a7)"/>
+          <line x1="318" y1="74" x2="334" y2="74" stroke="#2a271f" stroke-width="2" marker-end="url(#a7)"/>
+          <line x1="480" y1="74" x2="496" y2="74" stroke="#2a271f" stroke-width="2" marker-end="url(#a7)"/>
+          <line x1="642" y1="74" x2="658" y2="74" stroke="#2a271f" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#a7)"/>
+
+          <rect x="662" y="46" width="66" height="56" fill="none" stroke="#5a5442" stroke-width="1.6" stroke-dasharray="5 4"/>
+          <text x="695" y="68" font-size="10" fill="#5a5442">RESTE</text>
+          <text x="695" y="83" font-size="9.5" fill="#5a5442">2ᵉ voyage</text>
+
+          <text x="14" y="30" text-anchor="start" font-size="11" fill="#5a5442">Ordre de remplissage du sac avant toute sortie :</text>
+          <text x="14" y="140" text-anchor="start" font-size="11.5" fill="#8a3324" font-weight="600">Surcharge → endurance réduite → vitesse réduite → rattrapé.</text>
+          <text x="14" y="160" text-anchor="start" font-size="11" fill="#5a5442">Deux voyages légers valent toujours mieux qu'un voyage lourd.</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 09 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">09</div><div class="sec-title">Véhicules</div></div>
+  <div class="tagline">Un gain de vitesse qui se paie en attention.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Gain de vitesse et de capacité de transport, mais bruit qui attire sur un large rayon</li>
+      <li>Ne jamais se garer près de la base (voir Fig. 3, repère 8)</li>
+      <li>Surveiller carburant et état mécanique — réparations = pièces + compétence mécanique</li>
+      <li>Une voiture qui cale en pleine fuite devient un piège mortel</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 10 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">10</div><div class="sec-title">Compétences, traits &amp; occupations</div></div>
+  <div class="tagline">Personne ne naît survivant.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Les compétences progressent par la pratique, accélérées par les livres de compétence</li>
+      <li>Les traits choisis à la création orientent durablement la progression → les choisir selon le rôle prévu dans le groupe, pas au hasard</li>
+      <li>L'occupation de départ (fermier, mécanicien, infirmier…) donne des bonus cohérents avec un rôle</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 11 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">11</div><div class="sec-title">Artisanat &amp; autosuffisance</div></div>
+  <div class="tagline">L'autosuffisance n'est pas un choix, c'est une échéance.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Progression : bricolage de fortune → autonomie complète</li>
+      <li>Forge, poterie, travail de la pierre = indépendance vis-à-vis du pillage, mais <b>long à monter</b> → démarrer tôt</li>
+      <li>Menuiserie = socle immédiat (barricades, meubles, stockage), progresse plus vite</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 8 — Deux vitesses de progression artisanale</div>
+      <svg viewBox="0 0 740 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="a8" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 z" fill="#2a271f"/>
+          </marker>
+          <marker id="a8r" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 z" fill="#8a3324"/>
+          </marker>
+        </defs>
+        <g font-family="'IBM Plex Mono',monospace" font-size="12">
+          <rect x="14" y="112" width="150" height="60" fill="#d9cea8" stroke="#2a271f" stroke-width="2.4"/>
+          <text x="89" y="138" text-anchor="middle" font-weight="700">BRICOLAGE</text>
+          <text x="89" y="156" text-anchor="middle" font-weight="700">DE FORTUNE</text>
+
+          <path d="M164 130 L214 78" stroke="#2a271f" stroke-width="2" fill="none" marker-end="url(#a8)"/>
+          <path d="M164 154 L214 206" stroke="#8a3324" stroke-width="2.4" fill="none" marker-end="url(#a8r)"/>
+
+          <!-- voie rapide -->
+          <rect x="220" y="46" width="180" height="60" fill="#e7dfc6" stroke="#4d5a3a" stroke-width="2.4"/>
+          <text x="310" y="70" text-anchor="middle" font-weight="700" fill="#4d5a3a">MENUISERIE</text>
+          <text x="310" y="90" text-anchor="middle" font-size="10.5">monte vite · dès J1</text>
+          <path d="M400 76 L444 76" stroke="#2a271f" stroke-width="2" marker-end="url(#a8)"/>
+          <rect x="450" y="46" width="270" height="60" fill="none" stroke="#2a271f" stroke-width="1.6"/>
+          <text x="585" y="70" text-anchor="middle" font-size="11.5">Barricades · meubles · stockage</text>
+          <text x="585" y="90" text-anchor="middle" font-size="10.5" fill="#4d5a3a">sécurise la base immédiatement</text>
+
+          <!-- voie lente -->
+          <rect x="220" y="176" width="180" height="60" fill="#e7dfc6" stroke="#8a3324" stroke-width="2.4"/>
+          <text x="310" y="200" text-anchor="middle" font-weight="700" fill="#8a3324">FORGE · POTERIE</text>
+          <text x="310" y="220" text-anchor="middle" font-size="10.5">TRAVAIL DE LA PIERRE</text>
+          <path d="M400 206 L444 206" stroke="#8a3324" stroke-width="2.4" marker-end="url(#a8r)"/>
+          <rect x="450" y="176" width="270" height="60" fill="none" stroke="#8a3324" stroke-width="1.6"/>
+          <text x="585" y="200" text-anchor="middle" font-size="11.5">Outils &amp; armes fabriqués</text>
+          <text x="585" y="220" text-anchor="middle" font-size="10.5" fill="#8a3324">fin de dépendance au pillage</text>
+
+          <line x1="14" y1="268" x2="726" y2="268" stroke="#2a271f" stroke-width="1.6" marker-end="url(#a8)"/>
+          <text x="14" y="288" font-size="10.5" fill="#5a5442">premiers jours</text>
+          <text x="690" y="288" font-size="10.5" fill="#5a5442" text-anchor="end">long terme</text>
+          <text x="310" y="288" font-size="11" fill="#8a3324" font-weight="600" text-anchor="middle">démarrer la voie lente tôt, avant que le loot ne s'épuise</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 12 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">12</div><div class="sec-title">Gestion des cadavres</div></div>
+  <div class="tagline">Ce que tu abats aujourd'hui te suit demain si tu l'oublies.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Les corps qui s'accumulent près du camp attirent les mouches, dégagent une odeur et deviennent un risque sanitaire</li>
+      <li>Brûler ou éloigner régulièrement plutôt que laisser s'entasser</li>
+      <li>Un camp propre est un camp qui passe inaperçu</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 13 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">13</div><div class="sec-title">Difficulté croissante</div></div>
+  <div class="tagline">Le temps ne joue jamais pour toi.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Le nombre de morts-vivants augmente avec le temps de jeu</li>
+      <li>Le loot facile s'épuise dans les zones proches</li>
+      <li>Anticiper la bascule vers l'autosuffisance <b>avant</b> qu'elle devienne une urgence</li>
+    </ul>
+
+    <div class="figure">
+      <div class="fig-title">Fig. 9 — Pression et ressources dans la durée</div>
+      <svg viewBox="0 0 740 280" xmlns="http://www.w3.org/2000/svg">
+        <g font-family="'IBM Plex Mono',monospace" font-size="11.5">
+          <line x1="70" y1="30" x2="70" y2="220" stroke="#2a271f" stroke-width="1.6"/>
+          <line x1="70" y1="220" x2="700" y2="220" stroke="#2a271f" stroke-width="1.6"/>
+          <text x="62" y="36" text-anchor="end" font-size="10.5" fill="#5a5442">élevé</text>
+          <text x="62" y="218" text-anchor="end" font-size="10.5" fill="#5a5442">faible</text>
+          <text x="70" y="244" font-size="10.5" fill="#5a5442">début de partie</text>
+          <text x="700" y="244" font-size="10.5" fill="#5a5442" text-anchor="end">long terme</text>
+
+          <!-- loot décroissant -->
+          <path d="M70 52 C 220 66, 330 150, 700 200" fill="none" stroke="#4d5a3a"
+                stroke-width="2.8" stroke-dasharray="9 5"/>
+          <text x="120" y="46" fill="#4d5a3a" font-weight="600">Loot accessible</text>
+
+          <!-- pression croissante -->
+          <path d="M70 206 C 300 196, 420 110, 700 44" fill="none" stroke="#8a3324" stroke-width="3"/>
+          <text x="560" y="36" fill="#8a3324" font-weight="600" text-anchor="end">Pression morts-vivants</text>
+
+          <!-- croisement -->
+          <circle cx="376" cy="132" r="7" fill="#2a271f"/>
+          <line x1="376" y1="132" x2="376" y2="220" stroke="#2a271f" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <rect x="286" y="86" width="240" height="34" fill="#d9cea8" stroke="#2a271f" stroke-width="1.8"/>
+          <text x="406" y="107" text-anchor="middle" font-size="11" font-weight="600">point de bascule</text>
+
+          <text x="70" y="268" font-size="11" fill="#8a3324" font-weight="600">Amorcer la ferme, l'élevage et la forge bien avant ce croisement.</text>
+        </g>
+      </svg>
+      <div class="fig-note">Schéma indicatif — tendances relatives, variables selon les réglages sandbox du serveur.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 14 ============ -->
+<div class="section">
+  <div class="sec-head"><div class="sec-num">14</div><div class="sec-title">Spécificités multijoueur</div></div>
+  <div class="tagline">Seul on meurt vite, à plusieurs on meurt moins bêtement.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Tout le groupe sur la <b>même version exacte</b> du jeu, sinon connexion impossible</li>
+      <li>Sauvegarder régulièrement côté serveur, surtout avant toute mise à jour</li>
+      <li>Bug de dépeçage, objet disparu ou dupliqué → une reconnexion règle généralement le problème</li>
+      <li>Répartir les rôles selon la taille réelle du groupe — trois ou quatre piliers solides valent mieux que six rôles à moitié tenus</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 15 ============ -->
+<div class="section" style="border-bottom:none;">
+  <div class="sec-head"><div class="sec-num">15</div><div class="sec-title">Erreurs qui coûtent cher</div></div>
+  <div class="tagline">Le récapitulatif à connaître par cœur.</div>
+  <div class="sec-body">
+    <ul>
+      <li>Courir en ville sans raison</li>
+      <li>Explorer seul, loin de tout appui, sans plan de repli</li>
+      <li>Stocker toutes les ressources critiques au même endroit</li>
+      <li>Négliger le sommeil et le moral</li>
+      <li>Ignorer une blessure mineure</li>
+      <li>Se garer bruyamment devant sa base</li>
+      <li>Partir en expédition risquée le sac trop chargé</li>
+    </ul>
+    <div class="callout warn">
+      <div class="callout-label">Avant chaque sortie</div>
+      <p>Sac allégé · endurance pleine · trousse médicale complète · itinéraire de repli connu du groupe.</p>
+    </div>
+  </div>
+</div>
+
+<div class="torn"></div>
+<div class="footer">
+  <div>Document de terrain — Réseau de survie de Knox County.<br>À transmettre à tout nouveau membre du groupe.</div>
+  <div class="sig">Reçu &amp; lu</div>
+</div>
+
+</div>
+</body>
+</html>
