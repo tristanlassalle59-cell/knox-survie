@@ -194,6 +194,23 @@ function renderBlock(block){
     box.appendChild(p);
     return box;
   }
+  if (block.type === 'cards'){
+    const grid = document.createElement('div');
+    grid.className = 'art-cards';
+    block.items.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'art-card';
+      const h = document.createElement('div');
+      h.className = 'art-card-title';
+      h.textContent = c.title;
+      const p = document.createElement('p');
+      p.textContent = c.text;
+      card.appendChild(h);
+      card.appendChild(p);
+      grid.appendChild(card);
+    });
+    return grid;
+  }
   return document.createElement('div');
 }
 

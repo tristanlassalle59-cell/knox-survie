@@ -84,6 +84,11 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:'JetBrains Mono
 .art-callout .lbl{font-size:10.5px;letter-spacing:2px;color:var(--amber);margin-bottom:5px;text-transform:uppercase;}
 .art-callout p{margin:0;font-size:13px;color:var(--text);line-height:1.5;}
 
+.art-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 4px 16px;}
+.art-card{border:1px solid var(--line);padding:10px 12px;background:rgba(255,176,46,0.03);}
+.art-card-title{font-size:12px;letter-spacing:1px;color:var(--amber);margin-bottom:5px;text-transform:uppercase;}
+.art-card p{margin:0;font-size:12.5px;color:var(--text-dim);line-height:1.5;}
+
 .art-nav{display:flex;gap:8px;margin-top:6px;}
 .art-nav-btn{
   flex:1;text-align:center;padding:10px 8px;font-size:12px;letter-spacing:0.5px;
@@ -100,6 +105,7 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:'JetBrains Mono
   .menu-item .tag{min-width:42px;}
   .art-nav{flex-direction:column;}
   .art-nav-btn{padding:13px 8px;}
+  .art-cards{grid-template-columns:1fr;}
 }
 
 /* Écran étroit : un panneau à la fois, comme un terminal plein écran. */
