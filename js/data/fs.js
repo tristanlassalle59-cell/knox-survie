@@ -36,13 +36,13 @@ const files = {
   lisez_moi: {
     path: '/KNOX_SURVIE/LISEZ_MOI_DABORD.txt',
     content: `Si tu lis ça, soit c'est toi qui as remonté ce disque d'une sacoche
-paumée, soit je suis mort et quelqu'un d'autre farfouille mes affaires.
+paumée, soit j'y suis resté et quelqu'un d'autre farfouille mes affaires.
 Dans les deux cas : tout ce dont j'ai eu besoin pour tenir est rangé
 ici, classé comme j'aurais aimé le trouver moi-même en arrivant.
 
 Commence par les manuels si t'es nouveau. Le reste, c'est pour
 construire une vraie base une fois que t'as compris les bases.
 
-— M.D.`
+— E.K.`
   }
 };

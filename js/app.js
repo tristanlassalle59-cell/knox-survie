@@ -388,7 +388,7 @@ function boot(){
     ['Vérification du disque... OK', 'b-out', 260],
     ['Secteurs endommagés : 3 (ignorés)', 'b-out', 320],
     ['Chargement du système de fichiers...', 'b-out', 240],
-    ['Session trouvée : "M.DELCOURT" — dernier accès : jour 47', 'b-out', 460],
+    ['Session trouvée : "E.KESSLER" — dernier accès : jour 47', 'b-out', 460],
     ['', 'b-out', 160],
     ['Bienvenue.', 'b-ok', 0],
   ];

@@ -1,7 +1,7 @@
 # Projet KNOX_SURVIE — PC de survivaliste retrouvé
 
 ## Concept
-Un site/app qui simule l'ordinateur d'un survivaliste ("M.DELCOURT") retrouvé
+Un site/app qui simule l'ordinateur d'un survivaliste ("E.KESSLER") retrouvé
 dans l'univers de Project Zomboid (Build 42.20). C'est un terminal fictif
 contenant tout ce qu'il avait préparé pour survivre : manuels, outils,
 références. Le joueur (l'utilisateur) explore ce disque comme s'il l'avait
@@ -9,6 +9,37 @@ vraiment trouvé.
 
 **Ton du projet : c'est pour le kiff, un projet perso à partager avec un
 groupe de potes qui joue à Project Zomboid ensemble. Pas un produit commercial.**
+
+## Lore d'Earl Kessler (le survivaliste)
+
+- Type ordinaire de Knox County, pas un super-soldat : manuellement compétent
+  (mécanicien ou quincaillier), bricolait et chassait déjà avant l'effondrement.
+- Peu bavard, direct, pas du genre à s'épancher. Il note des faits, jamais des
+  sentiments. Le ton de tout ce qu'il écrit doit rester sec et pratique.
+- Il n'a PAS organisé ce disque pour quelqu'un d'autre à l'origine — c'est son
+  propre système, construit pour lui-même au fil des semaines. Le
+  LISEZ_MOI_DABORD.txt n'est qu'un ajout tardif.
+- Il avait un accès non-autorisé à un réseau militaire (jamais expliqué
+  comment), ce qui lui a donné quelques jours d'avance sur l'effondrement
+  officiel. C'est la vraie raison derrière "il avait tout prévu" — jamais à
+  révéler plus que l'entrée du Jour 3 ne le fait.
+- Le journal s'arrête au Jour 44 (présence suspecte près de la clôture). Le
+  boot affiche "dernier accès : jour 47". Cet écart de 3 jours est
+  VOLONTAIRE et ne doit JAMAIS être expliqué explicitement, nulle part. Ni
+  mort confirmée, ni capture confirmée, ni départ confirmé — le flou fait
+  partie du personnage, y compris dans de futurs easter eggs.
+- Toute nouvelle feature doit se justifier par "Kessler l'a fait/laissé",
+  jamais par "nous, le groupe, on l'ajoute".
+
+### Règles strictes
+
+- Ne jamais écrire d'entrée de journal après le Jour 44
+- Ne jamais nommer l'armée précisément, ni détailler le type d'accès piraté
+- Ne jamais confirmer ou infirmer explicitement une disparition, une capture
+  ou une mort — même dans un futur easter egg, fichier caché, ou message
+  système
+- Ne jamais mentionner le groupe de potes ou l'utilisateur dans le contenu du
+  disque — tout reste écrit du point de vue de Kessler
 
 ## Où en est le projet (état actuel)
 
@@ -35,7 +66,7 @@ srcdoc y est encore visible si besoin de référence).
   - `--text:#c9d1b8` `--text-dim:#7d8870`
 - **Polices** : Share Tech Mono (titres/boot), JetBrains Mono (corps)
 - **Effet CRT** : scanlines fines en fond (repeating-linear-gradient), à garder
-- Séquence de boot au chargement (vérification disque, session "M.DELCOURT",
+- Séquence de boot au chargement (vérification disque, session "E.KESSLER",
   jour 47) avant d'afficher le menu
 
 ## Modèle d'interaction (validé)
@@ -98,18 +129,24 @@ dans un seul fichier.
 **LISEZ_MOI_DABORD.txt**
 ```
 Si tu lis ça, soit c'est toi qui as remonté ce disque d'une sacoche
-paumée, soit je suis mort et quelqu'un d'autre farfouille mes affaires.
+paumée, soit j'y suis resté et quelqu'un d'autre farfouille mes affaires.
 Dans les deux cas : tout ce dont j'ai eu besoin pour tenir est rangé
 ici, classé comme j'aurais aimé le trouver moi-même en arrivant.
 
 Commence par les manuels si t'es nouveau. Le reste, c'est pour
 construire une vraie base une fois que t'as compris les bases.
 
-— M.D.
+— E.K.
 ```
 
 **PERSONNEL/journal.txt**
 ```
+Jour 3 — J'avais accès à des trucs que j'aurais pas dû avoir — un vieux
+accès à un réseau militaire, jamais fermé proprement. J'ai vu passer des
+rapports qui parlaient déjà de "confinement" trois jours avant que ça
+sorte aux infos. Je n'écrirai pas comment j'y suis entré. Trois jours
+d'avance, j'en ai profité.
+
 Jour 12 — Trouvé une pelle correcte au garage de la 4e rue. Toujours
 pas de nouvelles de R.
 
@@ -117,7 +154,14 @@ Jour 24 — Le poulailler tient. Le renard est revenu deux fois, j'ai
 refermé la porte trois fois plus solidement.
 
 Jour 40 — Rien à signaler. C'est déjà beaucoup.
+
+Jour 44 — Quelqu'un est passé près de la clôture cette nuit. Pas un
+rôdeur — la démarche était trop réglée, trop silencieuse. J'ai planqué
+le disque plus profond que d'habitude.
 ```
+Le fichier s'arrête là. Rien après le Jour 44 — voir la section lore ci-dessous
+pour pourquoi cet écart avec le "jour 47" du boot est volontaire et ne doit
+jamais être expliqué.
 
 **Les 15 titres du Tome 1** (dans l'ordre, du plus vital au moins critique) :
 01 Le bruit te trahit *(déjà porté intégralement)* · 02 Santé & système médical ·
