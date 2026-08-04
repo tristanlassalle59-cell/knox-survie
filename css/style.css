@@ -47,6 +47,12 @@ body{margin:0;background:var(--bg);color:var(--text);font-family:'JetBrains Mono
 .menu-item .label{flex:1;}
 .menu-item .arrow{opacity:0;color:var(--bg);}
 .menu-item.hl, .retour.hl{background:var(--amber);color:#1a1408;}
+.menu-item.current{
+  background:rgba(255,176,46,0.1);color:var(--amber);
+  border-left:2px solid var(--amber);padding-left:6px;
+}
+.menu-item.current .tag{color:var(--amber);}
+.menu-item.current .arrow{opacity:1;color:var(--amber);}
 .menu-item.hl .tag{color:#4a3a10;}
 .menu-item.hl .arrow{opacity:1;color:#1a1408;}
 .menu-item.pressed{background:#fff3d6;}

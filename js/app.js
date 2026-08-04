@@ -17,7 +17,7 @@ function render(){
   const s = topScreen();
   const leafActive = s.kind !== 'menu';
 
-  renderMenuPane(activeMenuEntry(), !leafActive);
+  renderMenuPane(activeMenuEntry(), !leafActive, leafActive ? s : null);
 
   if (s.kind === 'file'){
     renderLeaf(files[s.key].path, files[s.key].content, null);
@@ -32,7 +32,7 @@ function render(){
   layout.classList.toggle('showing-detail', leafActive);
 }
 
-function renderMenuPane(entry, isActive){
+function renderMenuPane(entry, isActive, currentLeaf){
   const node = nodes[entry.key];
   const pane = document.getElementById('pane-menu');
   pane.innerHTML = '';
@@ -60,6 +60,9 @@ function renderMenuPane(entry, isActive){
   node.items.forEach((it, i) => {
     const li = document.createElement('li');
     li.className = 'menu-item';
+    if (currentLeaf && it.action.type === currentLeaf.kind && it.action.key === currentLeaf.key){
+      li.classList.add('current');
+    }
     if (isActive) li.id = 'sel-' + (i + offset);
     li.innerHTML = `<span class="tag">${it.tag}</span><span class="label">${it.label}</span><span class="arrow">&gt;</span>`;
     if (isActive) li.addEventListener('mouseenter', () => setHighlight(i + offset));
