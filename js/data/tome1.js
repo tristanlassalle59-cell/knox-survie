@@ -26,5 +26,17 @@ const articles = {
         'Surveille aussi le moral : peur, solitude et désespoir altèrent le jugement',
       ]}
     ]
+  },
+  art03: {
+    path: '/KNOX_SURVIE/01_MANUELS/03 — Fatigue & sommeil',
+    blocks: [
+      {type:'tagline', text:'Un corps épuisé est un corps mort.'},
+      {type:'bullets', items:[
+        'Ne jamais dormir dehors ou dans un lieu non sécurisé',
+        'Barricade avant de fermer les yeux',
+        'Faim, soif et moral bas amplifient chaque effet de la fatigue',
+        'Un perso non reposé perd endurance, précision et jugement — et peut s’endormir de force au pire moment',
+      ]}
+    ]
   }
 };

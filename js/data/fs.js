@@ -15,7 +15,7 @@ const nodes = {
     items: [
       {label:'01 — Le bruit te trahit', tag:'[ART]', action:{type:'article', key:'art01'}},
       {label:'02 — Santé & système médical', tag:'[ART]', action:{type:'article', key:'art02'}},
-      {label:'03 — Fatigue & sommeil', tag:'[ART]', action:{type:'stub', msg:'ARTICLE PAS ENCORE PORTÉ DANS LE TERMINAL.'}},
+      {label:'03 — Fatigue & sommeil', tag:'[ART]', action:{type:'article', key:'art03'}},
       {label:'04 — Choisir & sécuriser sa base', tag:'[ART]', action:{type:'stub', msg:'ARTICLE PAS ENCORE PORTÉ DANS LE TERMINAL.'}},
       {label:'05 — Eau, nourriture & élevage', tag:'[ART]', action:{type:'stub', msg:'ARTICLE PAS ENCORE PORTÉ DANS LE TERMINAL.'}},
       {label:'06 — Combat & tactique', tag:'[ART]', action:{type:'stub', msg:'ARTICLE PAS ENCORE PORTÉ DANS LE TERMINAL.'}},
