@@ -7,7 +7,13 @@ const nodes = {
       {label:'02_ROLES_ET_COMPETENCES', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
       {label:'03_OUTILS', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
       {label:'04_REFERENCE_TERRAIN', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
-      {label:'PERSONNEL', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
+      {label:'PERSONNEL', tag:'[DIR]', action:{type:'menu', key:'personnel'}},
+    ]
+  },
+  personnel: {
+    path: '/KNOX_SURVIE/PERSONNEL',
+    items: [
+      {label:'journal.txt', tag:'[TXT]', action:{type:'file', key:'journal'}},
     ]
   },
   manuels: {
@@ -44,5 +50,25 @@ Commence par les manuels si t'es nouveau. Le reste, c'est pour
 construire une vraie base une fois que t'as compris les bases.
 
 — E.K.`
+  },
+  journal: {
+    path: '/KNOX_SURVIE/PERSONNEL/journal.txt',
+    content: `Jour 3 — J'avais accès à des trucs que j'aurais pas dû avoir — un vieux
+accès à un réseau militaire, jamais fermé proprement. J'ai vu passer des
+rapports qui parlaient déjà de "confinement" trois jours avant que ça
+sorte aux infos. Je n'écrirai pas comment j'y suis entré. Trois jours
+d'avance, j'en ai profité.
+
+Jour 12 — Trouvé une pelle correcte au garage de la 4e rue. Toujours
+pas de nouvelles de R.
+
+Jour 24 — Le poulailler tient. Le renard est revenu deux fois, j'ai
+refermé la porte trois fois plus solidement.
+
+Jour 40 — Rien à signaler. C'est déjà beaucoup.
+
+Jour 44 — Quelqu'un est passé près de la clôture cette nuit. Pas un
+rôdeur — la démarche était trop réglée, trop silencieuse. J'ai planqué
+le disque plus profond que d'habitude.`
   }
 };

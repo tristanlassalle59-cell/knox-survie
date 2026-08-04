@@ -112,16 +112,14 @@ dans un seul fichier.
 ├── 01_MANUELS/                    [liste plate des articles, pas de sous-dossier par tome —
 │                                    on ne présente plus le contenu comme des documents PDF
 │                                    séparés, le terminal est le seul guide]
-│   ├── 01 — Le bruit te trahit           [porté]
-│   ├── 02 — Santé & système médical      [porté]
-│   └── 03 à 15 (Tome 1)                  [stubs, pas encore portés]
+│   └── 01 à 15 (Tome 1)                  [Tome 1 complet, porté]
 ├── 02_ROLES_ET_COMPETENCES/       [stub, pas construit]
 ├── 03_OUTILS/
 │   ├── configurateur_survie.html [fonctionnel, à réintégrer]
 │   └── explorateur_artisanat.html [stub, pas construit]
 ├── 04_REFERENCE_TERRAIN/          [stub, pas construit]
 └── PERSONNEL/
-    └── journal.txt                [fait, contenu réel, voir plus bas]
+    └── journal.txt                [fait, branché dans le terminal, voir contenu plus bas]
 ```
 
 ## Contenu déjà écrit (à réutiliser tel quel)
