@@ -299,7 +299,8 @@ function renderBlock(block){
 }
 
 function articleOrder(){
-  return nodes.manuels.items
+  const entry = activeMenuEntry();
+  return nodes[entry.key].items
     .filter(it => it.action && it.action.type === 'article')
     .map(it => it.action.key);
 }
@@ -348,6 +349,13 @@ function selectItem(i){
     playDeny();
     const m = document.getElementById('stub-msg');
     if (m){ m.textContent = it.action.msg; m.style.display = 'block'; }
+    return;
+  }
+
+  if (it.action.type === 'link'){
+    flashPress(i);
+    playConfirm();
+    window.open(it.action.url, '_blank');
     return;
   }
 

@@ -5,8 +5,8 @@ const nodes = {
       {label:'LISEZ_MOI_DABORD.txt', tag:'[TXT]', action:{type:'file', key:'lisez_moi'}},
       {label:'01_MANUELS', tag:'[DIR]', action:{type:'menu', key:'manuels'}},
       {label:'02_ROLES_ET_COMPETENCES', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
-      {label:'03_OUTILS', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
-      {label:'04_REFERENCE_TERRAIN', tag:'[DIR]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
+      {label:'03_OUTILS', tag:'[DIR]', action:{type:'menu', key:'outils'}},
+      {label:'04_REFERENCE_TERRAIN', tag:'[DIR]', action:{type:'menu', key:'reference_terrain'}},
       {label:'PERSONNEL', tag:'[DIR]', action:{type:'menu', key:'personnel'}},
     ]
   },
@@ -14,6 +14,24 @@ const nodes = {
     path: '/KNOX_SURVIE/PERSONNEL',
     items: [
       {label:'journal.txt', tag:'[TXT]', action:{type:'file', key:'journal'}},
+    ]
+  },
+  outils: {
+    path: '/KNOX_SURVIE/03_OUTILS',
+    items: [
+      {label:'configurateur_survie.html', tag:'[APP]', action:{type:'link', url:'tools/configurateur.html'}},
+      {label:'explorateur_artisanat.html', tag:'[APP]', action:{type:'stub', msg:'MODULE EN CONSTRUCTION.'}},
+    ]
+  },
+  reference_terrain: {
+    path: '/KNOX_SURVIE/04_REFERENCE_TERRAIN',
+    items: [
+      {label:'01 — Santé approfondie', tag:'[ART]', action:{type:'article', key:'ref01'}},
+      {label:'02 — Artisanat : les 12 filières', tag:'[ART]', action:{type:'article', key:'ref02'}},
+      {label:'03 — Chasse, piégeage & pêche', tag:'[ART]', action:{type:'article', key:'ref03'}},
+      {label:'04 — Élevage', tag:'[ART]', action:{type:'article', key:'ref04'}},
+      {label:'05 — Agriculture', tag:'[ART]', action:{type:'article', key:'ref05'}},
+      {label:'06 — Véhicules & mécanique', tag:'[ART]', action:{type:'article', key:'ref06'}},
     ]
   },
   manuels: {

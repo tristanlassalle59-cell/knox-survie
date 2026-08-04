@@ -126,14 +126,32 @@ dans un seul fichier.
 │                                    on ne présente plus le contenu comme des documents PDF
 │                                    séparés, le terminal est le seul guide]
 │   └── 01 à 15 (Tome 1)                  [Tome 1 complet, porté]
-├── 02_ROLES_ET_COMPETENCES/       [stub, pas construit]
+├── 02_ROLES_ET_COMPETENCES/       [stub, pas construit — voir note Tome 2 ci-dessous]
 ├── 03_OUTILS/
-│   ├── configurateur_survie.html [fonctionnel, à réintégrer]
+│   ├── configurateur_survie.html [fonctionnel, relié au menu (action de type 'link', nouvel onglet)]
 │   └── explorateur_artisanat.html [stub, pas construit]
-├── 04_REFERENCE_TERRAIN/          [stub, pas construit]
+├── 04_REFERENCE_TERRAIN/          [6 articles du Tome 2, filtrés RP — voir note ci-dessous]
 └── PERSONNEL/
     └── journal.txt                [fait, branché dans le terminal, voir contenu plus bas]
 ```
+
+### Note : contenu du Tome 2 filtré pour rester dans la fiction
+
+Le Tome 2 source (`Sources/Manuel_Technique_Tome2_Illustre.html`) contient 10 articles,
+mais 4 d'entre eux s'adressent explicitement au groupe de joueurs réel (réglages
+serveur/mods, répartition des rôles "selon votre nombre de joueurs", commandes
+d'administration serveur, liens vers des sites externes comme pzwiki.net) — Kessler,
+personnage fictif de 2026, ne peut pas les avoir écrits. **Décision actée : ces 4
+articles ne sont PAS portés dans le terminal, nulle part, y compris dans 03_OUTILS.**
+Seuls les 6 articles compatibles avec la fiction sont dans `04_REFERENCE_TERRAIN`
+(santé approfondie, artisanat détaillé, chasse/pêche, élevage, agriculture,
+véhicules/mécanique) — reformulés au passage pour retirer le jargon de jeu qui
+cassait le 4e mur (XP, "vanilla", références de version B41/B42, capacité serveur/RAM,
+etc.), tout en gardant le contenu pratique intact.
+
+`02_ROLES_ET_COMPETENCES` reste un stub : le seul contenu source qui aurait pu y
+aller est justement l'un des 4 articles exclus. Ne pas y remettre de contenu sans
+l'écrire réellement dans la voix de Kessler (pas d'extraction possible ici).
 
 ## Contenu déjà écrit (à réutiliser tel quel)
 
@@ -200,10 +218,12 @@ Le contenu complet de ces 15 articles existe déjà dans
 `Sources/Manuel_Survie_Knox_County_Illustre.html` (converti depuis le PDF d'origine,
 fourni dans ce dossier) — à extraire article par article plutôt qu'à réécrire.
 
-Le Tome 2 (10 articles techniques : réglages, artisanat, chasse, élevage,
-agriculture, véhicules, admin serveur) existe dans
+Le Tome 2 source (10 articles techniques) existe dans
 `Sources/Manuel_Technique_Tome2_Illustre.html` (converti depuis le docx d'origine,
-fourni dans ce dossier).
+fourni dans ce dossier) — **seuls 6 des 10 sont portés** (voir la note de filtrage
+RP dans la section arborescence ci-dessus). Les 6 portés vivent dans `js/data/tome2.js`
+sous `04_REFERENCE_TERRAIN` : santé approfondie, artisanat détaillé, chasse/pêche,
+élevage, agriculture, véhicules & mécanique.
 
 ## Décisions actées (validées avec l'utilisateur — ne pas remettre en question)
 
@@ -219,7 +239,7 @@ index.html
 css/style.css
 js/app.js          (moteur de navigation + rendu)
 js/data/tome1.js   (les 15 articles)
-js/data/tome2.js   (les 10 articles)
+js/data/tome2.js   (6 des 10 articles du Tome 2, filtrés RP)
 js/data/fs.js      (arborescence du disque)
 tools/configurateur.html
 ```
@@ -297,8 +317,9 @@ ambre/CRT et probablement resimplifiées pour l'écran — ce n'est pas un copie
   n'a de sens qu'une fois le contenu en place.
 - **Accessibilité clavier poussée** : focus visible au tab, Échap pour revenir en
   arrière. La nav flèches+Entrée existe déjà et suffit pour l'usage réel.
-- **Modules non construits** : `02_ROLES_ET_COMPETENCES`, `explorateur_artisanat.html`,
-  `04_REFERENCE_TERRAIN`. Le contenu source existe dans les deux tomes.
+- **Modules non construits** : `02_ROLES_ET_COMPETENCES` (pas de contenu source
+  compatible avec la fiction, voir note Tome 2 plus haut), `explorateur_artisanat.html`
+  (aucun contenu source identifié pour l'instant).
 
 ## Méthode de travail préférée
 
