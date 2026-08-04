@@ -53,22 +53,37 @@ construire une vraie base une fois que t'as compris les bases.
   },
   journal: {
     path: '/KNOX_SURVIE/PERSONNEL/journal.txt',
-    content: `Jour 3 — J'avais accès à des trucs que j'aurais pas dû avoir — un vieux
-accès à un réseau militaire, jamais fermé proprement. J'ai vu passer des
-rapports qui parlaient déjà de "confinement" trois jours avant que ça
-sorte aux infos. Je n'écrirai pas comment j'y suis entré. Trois jours
-d'avance, j'en ai profité.
+    content: `Jour 1 — J'ai eu accès à des trucs que j'aurais pas dû voir — un vieux
+réseau militaire, jamais fermé proprement. Ce que j'ai lu me fait
+penser qu'un genre d'épidémie grave se prépare, et le gouvernement sait
+déjà tout et y est certainement pour quelque chose.
+Evidemment, personne n'est encore au courant. Dans le doute, je
+commence à faire des réserves.
 
-Jour 12 — Trouvé une pelle correcte au garage de la 4e rue. Toujours
-pas de nouvelles de R.
+Jour 2 — C'est étrange de se préparer alors que tout le monde fait sa
+vie tranquillement, j'espère pouvoir finir le guide à temps pour le
+distribuer aux survivants.
+PS : pas de nouvelles de R.
 
-Jour 24 — Le poulailler tient. Le renard est revenu deux fois, j'ai
-refermé la porte trois fois plus solidement.
+Jour 3 — Rien de neuf sur le réseau. Je sécurise le poulailler avant
+que ça devienne urgent, si jamais j'ai raison. Je passe pour un fou
+dans les magasins mais je ne peux rien dire de mon côté, ce serait
+trop dangereux pour ma sécurité, déjà que je pense être surveillé.
 
-Jour 40 — Rien à signaler. C'est déjà beaucoup.
+Jour 4 — Ça y est ! J'en étais sûr, ils l'ont annoncé aux infos, ça
+commence déjà à être un carnage.
 
-Jour 44 — Quelqu'un est passé près de la clôture cette nuit. Pas un
-rôdeur — la démarche était trop réglée, trop silencieuse. J'ai planqué
-le disque plus profond que d'habitude.`
+Jour 5 — Je continue de me préparer, mais les militaires ont mis le
+comté en quarantaine. Les routes principales sont bloquées.
+
+Jour 6 — Le poulailler tient. Le renard est revenu deux fois cette
+nuit, j'ai refermé la porte trois fois plus solidement.
+
+Jour 7 — Je vois des horreurs, il faut que je sorte le moins possible,
+c'est terrible.
+
+Jour 8 — Quelqu'un est passé près de la clôture cette nuit. Pas un
+rôdeur — la démarche était trop réglée, trop silencieuse. J'ai
+planqué le disque plus profond que d'habitude.`
   }
 };

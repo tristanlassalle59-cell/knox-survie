@@ -12,34 +12,47 @@ groupe de potes qui joue à Project Zomboid ensemble. Pas un produit commercial.
 
 ## Lore d'Earl Kessler (le survivaliste)
 
-- Type ordinaire de Knox County, pas un super-soldat : manuellement compétent
-  (mécanicien ou quincaillier), bricolait et chassait déjà avant l'effondrement.
-- Peu bavard, direct, pas du genre à s'épancher. Il note des faits, jamais des
-  sentiments. Le ton de tout ce qu'il écrit doit rester sec et pratique.
-- Il n'a PAS organisé ce disque pour quelqu'un d'autre à l'origine — c'est son
-  propre système, construit pour lui-même au fil des semaines. Le
-  LISEZ_MOI_DABORD.txt n'est qu'un ajout tardif.
+- Type ordinaire de Knox County, manuellement compétent (mécanicien ou
+  quincaillier), bricolait et chassait déjà avant l'effondrement.
+- Globalement peu bavard et factuel dans son écriture quotidienne (routine,
+  poulailler, réserves) — mais craque un peu dans le ton à deux moments
+  précis : la confirmation de ses craintes (Jour 4) et le pic d'horreur
+  (Jour 7). Ces deux éclats émotionnels sont volontaires, pas une
+  incohérence : ils contrastent avec sa sécheresse habituelle. Ne pas
+  généraliser ce ton expressif à tout le reste de son écriture.
+- Il prépare ce guide dans l'intention de le partager pour aider un
+  maximum de survivants — mais EN SECRET depuis le début. Révéler ce
+  qu'il sait (la fuite militaire) l'exposerait à un vrai danger. Le
+  LISEZ_MOI_DABORD.txt est la concrétisation tardive de cette intention
+  d'aider, pas une idée de dernière minute ni un projet égoïste.
 - Il avait un accès non-autorisé à un réseau militaire (jamais expliqué
-  comment), ce qui lui a donné quelques jours d'avance sur l'effondrement
-  officiel. C'est la vraie raison derrière "il avait tout prévu" — jamais à
-  révéler plus que l'entrée du Jour 3 ne le fait.
-- Le journal s'arrête au Jour 44 (présence suspecte près de la clôture). Le
-  boot affiche "dernier accès : jour 47". Cet écart de 3 jours est
-  VOLONTAIRE et ne doit JAMAIS être expliqué explicitement, nulle part. Ni
-  mort confirmée, ni capture confirmée, ni départ confirmé — le flou fait
-  partie du personnage, y compris dans de futurs easter eggs.
+  comment), qui lui a fait soupçonner l'épidémie avant l'annonce
+  officielle. Élément clé du lore : il pense que le gouvernement n'est
+  pas seulement informé à l'avance, mais RESPONSABLE de la fuite du
+  virus — une accusation de complot plus forte qu'une simple
+  connaissance passive. Jamais développée ni prouvée ailleurs dans le
+  projet ; jamais confirmée comme vraie non plus.
+- Le fil "R." (mentionné une fois, Jour 2) n'est jamais réexpliqué ni
+  refermé. Ne pas y revenir sauf décision explicite contraire.
+- Numérotation des jours : c'est celle de Kessler, indépendante du jour
+  réel de la partie du groupe. Les deux numérotations ne doivent JAMAIS
+  être mises en correspondance explicite dans le contenu du disque.
+- Journal : dernière entrée Jour 8 (présence suspecte à la clôture).
+  Boot : "dernier accès jour 10". Écart de 2 jours, VOLONTAIRE, jamais
+  expliqué — ni mort, ni capture, ni fuite confirmée nulle part, y
+  compris dans de futurs easter eggs.
 - Toute nouvelle feature doit se justifier par "Kessler l'a fait/laissé",
   jamais par "nous, le groupe, on l'ajoute".
 
 ### Règles strictes
 
-- Ne jamais écrire d'entrée de journal après le Jour 44
-- Ne jamais nommer l'armée précisément, ni détailler le type d'accès piraté
-- Ne jamais confirmer ou infirmer explicitement une disparition, une capture
-  ou une mort — même dans un futur easter egg, fichier caché, ou message
-  système
-- Ne jamais mentionner le groupe de potes ou l'utilisateur dans le contenu du
-  disque — tout reste écrit du point de vue de Kessler
+- Ne jamais ajouter d'entrée de journal après le Jour 8
+- Ne jamais confirmer ou infirmer explicitement une disparition, capture ou
+  mort
+- Ne jamais développer davantage l'accusation de complot gouvernemental
+- Ne jamais rouvrir le fil "R."
+- Ne jamais faire correspondre explicitement la numérotation de Kessler et
+  le jour réel de la partie du groupe
 
 ## Où en est le projet (état actuel)
 
@@ -67,7 +80,7 @@ srcdoc y est encore visible si besoin de référence).
 - **Polices** : Share Tech Mono (titres/boot), JetBrains Mono (corps)
 - **Effet CRT** : scanlines fines en fond (repeating-linear-gradient), à garder
 - Séquence de boot au chargement (vérification disque, session "E.KESSLER",
-  jour 47) avant d'afficher le menu
+  jour 10) avant d'afficher le menu
 
 ## Modèle d'interaction (validé)
 
@@ -139,26 +152,41 @@ construire une vraie base une fois que t'as compris les bases.
 
 **PERSONNEL/journal.txt**
 ```
-Jour 3 — J'avais accès à des trucs que j'aurais pas dû avoir — un vieux
-accès à un réseau militaire, jamais fermé proprement. J'ai vu passer des
-rapports qui parlaient déjà de "confinement" trois jours avant que ça
-sorte aux infos. Je n'écrirai pas comment j'y suis entré. Trois jours
-d'avance, j'en ai profité.
+Jour 1 — J'ai eu accès à des trucs que j'aurais pas dû voir — un vieux
+réseau militaire, jamais fermé proprement. Ce que j'ai lu me fait
+penser qu'un genre d'épidémie grave se prépare, et le gouvernement sait
+déjà tout et y est certainement pour quelque chose.
+Evidemment, personne n'est encore au courant. Dans le doute, je
+commence à faire des réserves.
 
-Jour 12 — Trouvé une pelle correcte au garage de la 4e rue. Toujours
-pas de nouvelles de R.
+Jour 2 — C'est étrange de se préparer alors que tout le monde fait sa
+vie tranquillement, j'espère pouvoir finir le guide à temps pour le
+distribuer aux survivants.
+PS : pas de nouvelles de R.
 
-Jour 24 — Le poulailler tient. Le renard est revenu deux fois, j'ai
-refermé la porte trois fois plus solidement.
+Jour 3 — Rien de neuf sur le réseau. Je sécurise le poulailler avant
+que ça devienne urgent, si jamais j'ai raison. Je passe pour un fou
+dans les magasins mais je ne peux rien dire de mon côté, ce serait
+trop dangereux pour ma sécurité, déjà que je pense être surveillé.
 
-Jour 40 — Rien à signaler. C'est déjà beaucoup.
+Jour 4 — Ça y est ! J'en étais sûr, ils l'ont annoncé aux infos, ça
+commence déjà à être un carnage.
 
-Jour 44 — Quelqu'un est passé près de la clôture cette nuit. Pas un
-rôdeur — la démarche était trop réglée, trop silencieuse. J'ai planqué
-le disque plus profond que d'habitude.
+Jour 5 — Je continue de me préparer, mais les militaires ont mis le
+comté en quarantaine. Les routes principales sont bloquées.
+
+Jour 6 — Le poulailler tient. Le renard est revenu deux fois cette
+nuit, j'ai refermé la porte trois fois plus solidement.
+
+Jour 7 — Je vois des horreurs, il faut que je sorte le moins possible,
+c'est terrible.
+
+Jour 8 — Quelqu'un est passé près de la clôture cette nuit. Pas un
+rôdeur — la démarche était trop réglée, trop silencieuse. J'ai
+planqué le disque plus profond que d'habitude.
 ```
-Le fichier s'arrête là. Rien après le Jour 44 — voir la section lore ci-dessous
-pour pourquoi cet écart avec le "jour 47" du boot est volontaire et ne doit
+Le fichier s'arrête là. Rien après le Jour 8 — voir la section lore ci-dessus
+pour pourquoi cet écart avec le "jour 10" du boot est volontaire et ne doit
 jamais être expliqué.
 
 **Les 15 titres du Tome 1** (dans l'ordre, du plus vital au moins critique) :
