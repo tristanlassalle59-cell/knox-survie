@@ -36,6 +36,37 @@ const articles = {
         'Fracture → attelle ou plâtre + repos strict, aucun effort intense pendant la convalescence',
         'Surveille aussi le moral : peur, solitude et désespoir altèrent le jugement',
       ]},
+      {type:'figure', caption:'Arbre de décision — quoi faire selon ce que tu as', svg:`<svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg">
+  <rect x="200" y="16" width="240" height="42" fill="none" stroke="#ffb02e" stroke-width="1.6"/>
+  <text x="320" y="42" text-anchor="middle" font-family="monospace" font-size="11" fill="#c9d1b8">BLESSURE VISIBLE ?</text>
+
+  <line x1="320" y1="58" x2="320" y2="80" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="150" y1="80" x2="490" y2="80" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="150" y1="80" x2="150" y2="100" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="490" y1="80" x2="490" y2="138" stroke="#ffb02e" stroke-width="1.4" stroke-dasharray="3 5"/>
+  <text x="150" y="74" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">oui</text>
+  <text x="490" y="74" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">non</text>
+
+  <line x1="150" y1="100" x2="150" y2="118" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="90" y1="118" x2="250" y2="118" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="90" y1="118" x2="90" y2="138" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="250" y1="118" x2="250" y2="138" stroke="#ffb02e" stroke-width="1.4"/>
+
+  <rect x="20" y="138" width="140" height="72" fill="none" stroke="#ff6a4d" stroke-width="1.8"/>
+  <text x="90" y="165" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#ff6a4d">MORSURE</text>
+  <text x="90" y="185" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">quasi toujours</text>
+  <text x="90" y="199" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">fatale</text>
+
+  <rect x="180" y="138" width="140" height="72" fill="none" stroke="#ffb02e" stroke-width="1.6"/>
+  <text x="250" y="165" text-anchor="middle" font-family="monospace" font-size="11" fill="#ffb02e">GRIFFURE / COUPURE</text>
+  <text x="250" y="185" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">traitable si</text>
+  <text x="250" y="199" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">désinfecté</text>
+
+  <rect x="420" y="138" width="140" height="72" fill="none" stroke="#ffb02e" stroke-width="1.4" stroke-dasharray="3 5"/>
+  <text x="490" y="165" text-anchor="middle" font-family="monospace" font-size="11" fill="#ffb02e">MALADIE</text>
+  <text x="490" y="185" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">cause à</text>
+  <text x="490" y="199" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">identifier</text>
+</svg>`},
       {type:'subtitle', text:'Premiers secours de base'},
       {type:'bullets', items:[
         'Bandez toute plaie qui saigne en priorité',

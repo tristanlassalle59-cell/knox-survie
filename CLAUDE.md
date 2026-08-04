@@ -403,8 +403,8 @@ Principes à appliquer à tout schéma, sans exception :
 Un schéma à la fois, montré et validé avant de passer au suivant.
 
 - [x] **Le bruit te trahit** — rayons sonores (code ci-dessus), intégré
-- [ ] **Santé & système médical** (`sante`) — arbre de décision : blessure visible ?
-      → morsure (danger, rouge) / griffure (traitable) ; pas de blessure → maladie
+- [x] **Santé & système médical** (`sante`) — arbre de décision : blessure visible ?
+      → morsure (danger, rouge) / griffure (traitable) ; pas de blessure → maladie (pointillé, incertain), intégré
 - [ ] **Choisir & sécuriser sa base** (`base`) — plan au sol simplifié, accès annotés
 - [ ] **Combat & tactique** (`combat`) — encerclement en terrain ouvert (dangereux)
       vs goulot d'étranglement (maîtrisable)
