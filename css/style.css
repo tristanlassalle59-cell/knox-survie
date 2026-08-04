@@ -13,10 +13,34 @@
 body{margin:0;background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;}
 .crt{
   max-width:760px;margin:0 auto;padding:18px 20px 20px;min-height:100vh;
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px),
-    var(--bg);
+  background:var(--bg);
 }
+.crt::before{
+  content:'';position:fixed;inset:0;z-index:5;pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+  animation:crtFlicker 6.5s ease-in-out infinite;
+}
+@keyframes crtFlicker{
+  0%, 100%{opacity:1;}
+  8%{opacity:0.85;}
+  9%{opacity:1;}
+  52%{opacity:1;}
+  53%{opacity:0.9;}
+  54%{opacity:1;}
+  77%{opacity:0.94;}
+  78%{opacity:1;}
+}
+@keyframes screenFade{
+  from{opacity:0;transform:translateY(4px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.screen-fade{animation:screenFade 0.18s ease-out both;}
+.boot-cursor{
+  display:inline-block;width:7px;height:13px;background:var(--amber);
+  margin-left:2px;vertical-align:-2px;
+  animation:blink 1s step-start infinite;
+}
+@keyframes blink{50%{opacity:0;}}
 .topbar{
   font-family:'Share Tech Mono',monospace;font-size:10.5px;letter-spacing:1px;
   color:var(--amber-dim);border-bottom:1px solid var(--line);

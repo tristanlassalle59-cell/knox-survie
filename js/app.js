@@ -39,10 +39,13 @@ function renderMenuPane(entry, isActive, currentLeaf){
 
   if (isActive){ document.getElementById('top-path').textContent = node.path; }
 
+  const wrap = document.createElement('div');
+  wrap.className = 'screen-fade';
+
   const crumb = document.createElement('div');
   crumb.className = 'breadcrumb';
   crumb.textContent = node.path;
-  pane.appendChild(crumb);
+  wrap.appendChild(crumb);
 
   if (stack.length > 1){
     const retour = document.createElement('div');
@@ -51,7 +54,7 @@ function renderMenuPane(entry, isActive, currentLeaf){
     retour.innerHTML = '&lt; RETOUR';
     if (isActive) retour.addEventListener('mouseenter', () => setHighlight(0));
     retour.addEventListener('click', pop);
-    pane.appendChild(retour);
+    wrap.appendChild(retour);
   }
 
   const ul = document.createElement('ul');
@@ -69,17 +72,19 @@ function renderMenuPane(entry, isActive, currentLeaf){
     li.addEventListener('click', () => selectItem(i + offset));
     ul.appendChild(li);
   });
-  pane.appendChild(ul);
+  wrap.appendChild(ul);
 
   const stubMsg = document.createElement('div');
   stubMsg.className = 'stub-msg';
   stubMsg.id = 'stub-msg';
-  pane.appendChild(stubMsg);
+  wrap.appendChild(stubMsg);
 
   const hint = document.createElement('div');
   hint.className = 'hint';
   hint.innerHTML = '↑↓ pour naviguer · <b>Entrée</b> ou clic pour sélectionner';
-  pane.appendChild(hint);
+  wrap.appendChild(hint);
+
+  pane.appendChild(wrap);
 
   if (isActive){
     selectableCount = node.items.length + offset;
@@ -91,7 +96,7 @@ function renderDetailPlaceholder(){
   const pane = document.getElementById('pane-detail');
   pane.innerHTML = '';
   const msg = document.createElement('div');
-  msg.className = 'detail-placeholder';
+  msg.className = 'detail-placeholder screen-fade';
   msg.textContent = '// sélectionne un élément dans la liste';
   pane.appendChild(msg);
 }
@@ -104,10 +109,13 @@ function renderLeaf(path, textContent, extraNode, navButtons){
   document.getElementById('top-path').textContent = path;
   leafActions = [];
 
+  const wrap = document.createElement('div');
+  wrap.className = 'screen-fade';
+
   const crumb = document.createElement('div');
   crumb.className = 'breadcrumb';
   crumb.textContent = path;
-  pane.appendChild(crumb);
+  wrap.appendChild(crumb);
 
   const retour = document.createElement('div');
   retour.className = 'retour';
@@ -115,16 +123,16 @@ function renderLeaf(path, textContent, extraNode, navButtons){
   retour.innerHTML = '&lt; RETOUR';
   retour.addEventListener('mouseenter', () => setHighlight(0));
   retour.addEventListener('click', pop);
-  pane.appendChild(retour);
+  wrap.appendChild(retour);
   leafActions.push(pop);
 
-  if (extraNode){ pane.appendChild(extraNode); }
+  if (extraNode){ wrap.appendChild(extraNode); }
 
   if (textContent){
     const body = document.createElement('div');
     body.className = 'file-body';
     body.textContent = textContent;
-    pane.appendChild(body);
+    wrap.appendChild(body);
   }
 
   if (navButtons && navButtons.length){
@@ -141,13 +149,15 @@ function renderLeaf(path, textContent, extraNode, navButtons){
       nav.appendChild(el);
       leafActions.push(btn.handler);
     });
-    pane.appendChild(nav);
+    wrap.appendChild(nav);
   }
 
   const hint = document.createElement('div');
   hint.className = 'hint';
   hint.innerHTML = '<b>Entrée</b> ou clic pour sélectionner';
-  pane.appendChild(hint);
+  wrap.appendChild(hint);
+
+  pane.appendChild(wrap);
 
   selectableCount = leafActions.length;
   setHighlight(0);
@@ -296,27 +306,31 @@ document.addEventListener('keydown', e => {
 
 function boot(){
   const seq = [
-    ['KNOX-CO SALVAGE OS — v0.9', 'b-title'],
-    ['Vérification du disque... OK', 'b-out'],
-    ['Secteurs endommagés : 3 (ignorés)', 'b-out'],
-    ['Chargement du système de fichiers...', 'b-out'],
-    ['Session trouvée : "M.DELCOURT" — dernier accès : jour 47', 'b-out'],
-    ['', 'b-out'],
-    ['Bienvenue.', 'b-ok'],
+    ['KNOX-CO SALVAGE OS — v0.9', 'b-title', 160],
+    ['Vérification du disque... OK', 'b-out', 260],
+    ['Secteurs endommagés : 3 (ignorés)', 'b-out', 320],
+    ['Chargement du système de fichiers...', 'b-out', 240],
+    ['Session trouvée : "M.DELCOURT" — dernier accès : jour 47', 'b-out', 460],
+    ['', 'b-out', 160],
+    ['Bienvenue.', 'b-ok', 0],
   ];
   const bootEl = document.getElementById('boot');
   let i = 0;
   function step(){
     if (i >= seq.length){
-      setTimeout(render, 300);
+      const cursor = document.createElement('span');
+      cursor.className = 'boot-cursor';
+      bootEl.appendChild(cursor);
+      setTimeout(render, 550);
       return;
     }
     const div = document.createElement('div');
     div.className = seq[i][1];
     div.textContent = seq[i][0];
     bootEl.appendChild(div);
+    const delay = seq[i][2];
     i++;
-    setTimeout(step, i < 3 ? 220 : 90);
+    setTimeout(step, delay);
   }
   step();
 }
