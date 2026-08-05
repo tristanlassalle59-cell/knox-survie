@@ -415,6 +415,18 @@ Pattern validé sur le schéma "Choisir & sécuriser sa base" :
   rendue par le CSS existant (`.art-figure-caption`), aucun nouveau champ de
   bloc à ajouter au schéma de données
 
+### Intensité/niveau : hauteur de barre, jamais trait plein vs pointillé seul
+
+Bug rencontré sur "Météo & saisons" : une première version encodait l'intensité
+via l'épaisseur du trait + opacité + pointillé sur des cases de taille
+identique — illisible, les différences ne se voient pas à l'œil nu, il fallait
+lire la légende pour comprendre. Corrigé en histogramme classique (hauteur de
+barre = intensité, toutes les barres avec le même trait plein), immédiatement
+lisible sans légende. Retenir : **le pointillé reste réservé à la distinction
+certain/approximatif (principe 2)**, jamais à coder un niveau ou une quantité —
+pour ça, faire varier une dimension visuelle (hauteur, longueur), pas le style
+du trait.
+
 ### Suivi des 8-9 schémas prévus
 
 Un schéma à la fois, montré et validé avant de passer au suivant.
@@ -425,7 +437,7 @@ Un schéma à la fois, montré et validé avant de passer au suivant.
 - [x] **Choisir & sécuriser sa base** (`base`) — plan au sol simplifié, pastilles numérotées, intégré
 - [x] **Combat & tactique** (`combat`) — encerclement en terrain ouvert (rouge,
       dangereux) vs goulot d'étranglement (ambre, maîtrisable), intégré
-- [ ] **Météo & saisons** (`meteo`) — bandes horizontales de pression/danger par saison
+- [x] **Météo & saisons** (`meteo`) — histogramme 3 métriques × 4 saisons, intégré
 - [ ] **Eau, nourriture & élevage** (`eau`) — cycle de routine en boucle
 - [ ] **Agriculture** (`agriculture`) — calendrier saisonnier des cultures
 - [ ] **Artisanat & autosuffisance** (`artisanat`) — filières classées par moment

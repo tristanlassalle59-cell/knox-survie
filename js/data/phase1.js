@@ -144,7 +144,35 @@ const articles = {
         'Stocker vêtements chauds et imperméables avant l’urgence',
         'Jours plus courts en hiver → moins de temps d’action utile par journée',
         'Cultures limitées à certaines périodes → constituer les réserves avant la morte-saison',
-      ]}
+      ]},
+      {type:'figure', caption:'Pression saisonnière — plus la barre est haute, plus ça pèse', svg:`<svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg">
+  <text x="190" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">PRINTEMPS</text>
+  <text x="300" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">ÉTÉ</text>
+  <text x="410" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">AUTOMNE</text>
+  <text x="520" y="20" text-anchor="middle" font-family="monospace" font-size="10" fill="#c9d1b8">HIVER</text>
+
+  <text x="15" y="90" font-family="monospace" font-size="10" fill="#c9d1b8">CULTURES</text>
+  <line x1="150" y1="115" x2="560" y2="115" stroke="#ffb02e" stroke-width="1" stroke-opacity="0.3"/>
+  <rect x="170" y="61" width="40" height="54" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="280" y="57" width="40" height="58" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="390" y="81" width="40" height="34" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="500" y="107" width="40" height="8"  fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+
+  <text x="15" y="190" font-family="monospace" font-size="10" fill="#c9d1b8">JOURS UTILES</text>
+  <line x1="150" y1="215" x2="560" y2="215" stroke="#ffb02e" stroke-width="1" stroke-opacity="0.3"/>
+  <rect x="170" y="173" width="40" height="42" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="280" y="157" width="40" height="58" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="390" y="181" width="40" height="34" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="500" y="199" width="40" height="16" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+
+  <text x="15" y="290" font-family="monospace" font-size="10" fill="#c9d1b8">RISQUE FROID</text>
+  <line x1="150" y1="315" x2="560" y2="315" stroke="#ffb02e" stroke-width="1" stroke-opacity="0.3"/>
+  <rect x="170" y="303" width="40" height="12" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="280" y="310" width="40" height="5"  fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="390" y="285" width="40" height="30" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+  <rect x="500" y="257" width="40" height="58" fill="none" stroke="#ff6a4d" stroke-width="2"/>
+  <text x="520" y="246" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#ff6a4d">hypothermie</text>
+</svg>`}
     ]
   },
   cadavres: {
