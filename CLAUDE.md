@@ -423,8 +423,8 @@ Un schéma à la fois, montré et validé avant de passer au suivant.
 - [x] **Santé & système médical** (`sante`) — arbre de décision : blessure visible ?
       → morsure (danger, rouge) / griffure (traitable) ; pas de blessure → maladie (pointillé, incertain), intégré
 - [x] **Choisir & sécuriser sa base** (`base`) — plan au sol simplifié, pastilles numérotées, intégré
-- [ ] **Combat & tactique** (`combat`) — encerclement en terrain ouvert (dangereux)
-      vs goulot d'étranglement (maîtrisable)
+- [x] **Combat & tactique** (`combat`) — encerclement en terrain ouvert (rouge,
+      dangereux) vs goulot d'étranglement (ambre, maîtrisable), intégré
 - [ ] **Météo & saisons** (`meteo`) — bandes horizontales de pression/danger par saison
 - [ ] **Eau, nourriture & élevage** (`eau`) — cycle de routine en boucle
 - [ ] **Agriculture** (`agriculture`) — calendrier saisonnier des cultures

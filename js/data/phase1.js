@@ -98,7 +98,30 @@ const articles = {
         'Viser la tête une fois compétence et endurance suffisantes',
         'Surveiller l’endurance en permanence — attrapé à bout de souffle = contamination facile',
         'Armes à feu = urgence uniquement, jamais premier réflexe',
-      ]}
+      ]},
+      {type:'figure', caption:'Terrain ouvert (à éviter) vs goulot d’étranglement (à chercher)', svg:`<svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg">
+  <line x1="320" y1="20" x2="320" y2="400" stroke="#ffb02e" stroke-width="1.2" stroke-opacity="0.4" stroke-dasharray="3 5"/>
+
+  <text x="160" y="35" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#ff6a4d">TERRAIN OUVERT</text>
+  <circle cx="160" cy="230" r="5" fill="#ffb02e"/>
+  <circle cx="160" cy="145" r="8" fill="none" stroke="#ff6a4d" stroke-width="1.4"/>
+  <circle cx="234" cy="188" r="8" fill="none" stroke="#ff6a4d" stroke-width="1.4"/>
+  <circle cx="234" cy="273" r="8" fill="none" stroke="#ff6a4d" stroke-width="1.4"/>
+  <circle cx="160" cy="315" r="8" fill="none" stroke="#ff6a4d" stroke-width="1.4"/>
+  <circle cx="86"  cy="273" r="8" fill="none" stroke="#ff6a4d" stroke-width="1.4"/>
+  <circle cx="86"  cy="188" r="8" fill="none" stroke="#ff6a4d" stroke-width="1.4"/>
+  <text x="160" y="368" text-anchor="middle" font-family="monospace" font-size="10" fill="#ff6a4d">encerclé de tous côtés</text>
+
+  <text x="480" y="35" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#ffb02e">GOULOT D’ÉTRANGLEMENT</text>
+  <line x1="440" y1="205" x2="620" y2="205" stroke="#ffb02e" stroke-width="1.8"/>
+  <line x1="440" y1="255" x2="620" y2="255" stroke="#ffb02e" stroke-width="1.8"/>
+  <circle cx="590" cy="230" r="5" fill="#ffb02e"/>
+  <circle cx="500" cy="230" r="7" fill="none" stroke="#ffb02e" stroke-width="1.4"/>
+  <circle cx="430" cy="230" r="7" fill="none" stroke="#ffb02e" stroke-width="1.4"/>
+  <circle cx="390" cy="230" r="7" fill="none" stroke="#ffb02e" stroke-width="1.4"/>
+  <text x="555" y="195" text-anchor="middle" font-family="monospace" font-size="10" fill="#ffb02e">1-2 à la fois</text>
+  <text x="480" y="368" text-anchor="middle" font-family="monospace" font-size="10" fill="#ffb02e">un ou deux à la fois</text>
+</svg>`}
     ]
   },
   inventaire: {
