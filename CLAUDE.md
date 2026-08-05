@@ -398,6 +398,23 @@ Principes à appliquer à tout schéma, sans exception :
    le texte plutôt que d'ajouter un fond derrière (pas de fond = principe 5). Bug déjà rencontré : le label
    "accroupi" du premier schéma traversait le cercle intérieur avant correction (y=185 → y=203).
 
+### Pastilles numérotées + légende (pour les schémas à plusieurs points d'intérêt)
+
+Dès qu'un schéma a plus de 2-3 éléments à annoter (ex: un plan), préférer des
+petites pastilles numérotées sur le dessin plutôt que des labels textuels
+dispersés avec lignes de renvoi — plus lisible, et ça laisse le dessin épuré.
+Pattern validé sur le schéma "Choisir & sécuriser sa base" :
+- Petit cercle plein (`r="9" fill="#ffb02e"`) + chiffre centré par-dessus en
+  texte sombre (`fill="#11150f"`, la couleur de fond du terminal, pas de gris
+  générique) — seule exception tolérée au principe 1 (aucun remplissage sur
+  les *formes* du dessin), les pastilles sont des marqueurs de points, pas des
+  formes illustratives, au même titre que le point central du tout premier
+  schéma (`<circle r="4.5" fill="#ffb02e"/>`)
+- La légende associée va dans le champ `caption` du bloc `figure` (pas dans le
+  SVG) : une seule ligne compacte, format `1 Label · 2 Label · 3 Label`,
+  rendue par le CSS existant (`.art-figure-caption`), aucun nouveau champ de
+  bloc à ajouter au schéma de données
+
 ### Suivi des 8-9 schémas prévus
 
 Un schéma à la fois, montré et validé avant de passer au suivant.
@@ -405,7 +422,7 @@ Un schéma à la fois, montré et validé avant de passer au suivant.
 - [x] **Le bruit te trahit** — rayons sonores (code ci-dessus), intégré
 - [x] **Santé & système médical** (`sante`) — arbre de décision : blessure visible ?
       → morsure (danger, rouge) / griffure (traitable) ; pas de blessure → maladie (pointillé, incertain), intégré
-- [ ] **Choisir & sécuriser sa base** (`base`) — plan au sol simplifié, accès annotés
+- [x] **Choisir & sécuriser sa base** (`base`) — plan au sol simplifié, pastilles numérotées, intégré
 - [ ] **Combat & tactique** (`combat`) — encerclement en terrain ouvert (dangereux)
       vs goulot d'étranglement (maîtrisable)
 - [ ] **Météo & saisons** (`meteo`) — bandes horizontales de pression/danger par saison

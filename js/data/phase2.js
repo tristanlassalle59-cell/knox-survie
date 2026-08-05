@@ -16,7 +16,33 @@ Object.assign(articles, {
         'Bloque ou détruis les accès extérieurs superflus',
         'Verrouille systématiquement, chaque nuit',
         'Clôture périphérique = protège camp, cultures et bêtes d’un seul geste',
-      ]}
+      ]},
+      {type:'figure', caption:'1 Accès unique · 2 Fenêtres barricadées · 3 Étage / observation · 4 Clôture périphérique · 5 Sous-sol / stockage', svg:`<svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg">
+  <rect x="40" y="30" width="560" height="330" fill="none" stroke="#ffb02e" stroke-width="1.4" stroke-opacity="0.8" stroke-dasharray="3 5"/>
+  <rect x="220" y="120" width="200" height="160" fill="none" stroke="#ffb02e" stroke-width="1.8"/>
+
+  <line x1="214" y1="150" x2="226" y2="160" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="214" y1="170" x2="226" y2="180" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="414" y1="150" x2="426" y2="160" stroke="#ffb02e" stroke-width="1.4"/>
+  <line x1="414" y1="170" x2="426" y2="180" stroke="#ffb02e" stroke-width="1.4"/>
+
+  <line x1="320" y1="280" x2="320" y2="300" stroke="#ffb02e" stroke-width="1.6"/>
+
+  <circle cx="320" cy="308" r="9" fill="#ffb02e"/>
+  <text x="320" y="312" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#11150f">1</text>
+
+  <circle cx="196" cy="160" r="9" fill="#ffb02e"/>
+  <text x="196" y="164" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#11150f">2</text>
+
+  <circle cx="400" cy="138" r="9" fill="#ffb02e"/>
+  <text x="400" y="142" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#11150f">3</text>
+
+  <circle cx="58" cy="45" r="9" fill="#ffb02e"/>
+  <text x="58" y="49" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#11150f">4</text>
+
+  <circle cx="260" cy="225" r="9" fill="#ffb02e"/>
+  <text x="260" y="229" text-anchor="middle" font-family="monospace" font-size="10" font-weight="bold" fill="#11150f">5</text>
+</svg>`}
     ]
   },
   vehicules: {
